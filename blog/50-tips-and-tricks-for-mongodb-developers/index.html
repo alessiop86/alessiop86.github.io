@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>[Italian] 50 Tips and Tricks for MongoDB Developers di Kristina Chodorow</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] 50 Tips and Tricks for MongoDB Developers di Kristina Chodorow</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/suggerimenti-e-trucchi-per-mongodb-50-tips-and-tricks-for-mongodb-developers-di-kristina-chodorow/">old blog</a>)</small></small>
+<div class="entry-content">
+    <p>Dopo <a href="http://www.summarify.com/ita/nosql-e-mongodb/" title="NoSQL e MongoDB">questo articolo</a> di più di un anno fa, oggi torniamo a parlare di MongoDB.</p>
+    <p>In particolare parleremo di questo libro: <a href="http://www.amazon.it/gp/product/1449304613/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1449304613&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1449304613/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1449304613&amp;linkCode=as2&amp;tag=summarify-21', '50 Tips and Tricks for MongoDB Developers');">50 Tips and Tricks for MongoDB Developers</a><img src="http://ir-it.amazon-adsystem.com/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=1449304613" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"><br>
+        <a href="http://www.amazon.it/gp/product/1449304613/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1449304613&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1449304613/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1449304613&amp;linkCode=as2&amp;tag=summarify-21', '');"><img src="http://www.summarify.com/wp-content/uploads/2014/04/mongodbtricks.jpg" alt="mongodbtricks" width="378" height="495" class="alignright size-full wp-image-321" srcset="http://www.summarify.com/wp-content/uploads/2014/04/mongodbtricks.jpg 378w, http://www.summarify.com/wp-content/uploads/2014/04/mongodbtricks-229x300.jpg 229w" sizes="(max-width: 378px) 100vw, 378px"></a><br>
+        Questo breve libro racchiude dei consigli, corredati di esempi, su come utilizzare il database NoSQL MongoDB in modo corretto. Può capitare ad esempio che essendo abituati all’utilizzo di database relazionali, questa abitudine si rifletta sul nostro modo di utilizzare MongoDB: al contrario questo tipo di database è profondamente differente, e va utilizzato dimenticandoci o quasi tutto ciò che sappiamo sui database relazionali.</p>
+    <p>Esempi dei suggerimenti dell’autrice del libro:</p>
+    <ul>
+        <li><strong>Quando embeddare un’informazione? Quando invece inserirla in un documento a parte?</strong> Domanda complessa, l’autrice esamina quelli che sono tutti i parametri che vanno presi in considerazione durante questo processo decisionale: prendendo la decisione di embeddare delle informazioni, cioè incorporarle tutte in un sottodocumento,  si accettano possibili inconsistenze (anche solo temporanee, ad esempio bonificabili ad intervalli di tempo fissati tramite script batch) ma si ottengono performance migliori, dato che non sono necessarie query extra per recuperare questi dettagli. Altri parametri sono poi presi in considerazione, come numero di letture vs scritture (è sconsigliato embeddare un campo che cresce molto, ad esempio un array con centinaia di documenti, dato che l’operazione di append di sottodocumenti è poco efficiente)</li>
+        <li>Best practices quali l’inizializzazione dei campi previsti anche quando inizialmente sprovvisti di valore, spiegata dal punto di vista prestazionale, e l’operazione affine di preallocazione dello spazio quando è previsto che un documento crescerà considerevolmente già al momento della sua creazione</li>
+        <li><strong>Array vs documents</strong> quando sono intercambiabili? Quando non lo sono? E perchè? (Nell’ambito delle ricerche, se sappiamo cosa cercare meglio un document, quando invece dovremmo scorrere tutto la situazione si capovolge ed è consigliato l’utilizzo degli array)</li>
+        <li>MongoDB offre funzionalità avanzate ($where, altre funzioni logiche esprimibili in JS), ma non significa che dobbiamo abusarne, anzi il loro utilizzo viene sconsigliato nel libro tranne quando indispensabile.
+        </li><li>Cosa si cela dietro gli oggetti ObjectId ? Quando utilizzarli e quando invece preferire un identificativo proprio?</li>
+        <li>Il fatto che siano presenti le references non significa che dobbiamo usarle come fossero “JOIN”, andando a ricostruire un modello relazionale sopra MongoDB: soprattutto da un punto di vista relazionale sono sconsigliate: si tratta di query doppie in fondo, da evitare a causa delle povere performance.
+        </li></ul>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

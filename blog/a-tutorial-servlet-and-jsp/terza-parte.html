@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>[Italian] A tutorial – Servlet & JSP – terza parte</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<h1>[Italian] A tutorial – Servlet & JSP – terza parte</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/a-tutorial-servlet-jsp-terza-parte/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Servlet and JSP" src="http://www.summarify.com/wp-content/uploads/2013/04/servletjsp_tutorial3d.png" width="300" height="267"></div>
+        <p>Servlet &amp; JSP: a tutorial è l’unico libro che ho trovato che parlasse esplicitamente di Servlet 3.0 e JSP 2.2, fin dalla copertina. All’interno del libro vengono spesso evidenziate le novità appunto apportate da questa versione delle due tecnologie in poi (attualmente non sono le ultime disponibili, con Java EE 6 sono state rilasciate le versioni 3.1 delle specifiche Servlet e 2.3 delle specifiche JavaServer Pages, ma non ho trovato libri più aggiornati).</p>
+        <p>Se desiderate approfondire l’argomento, è possibile comprare il libro in <a href="http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21', ' versione cartacea');"> versione cartacea</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0980839629" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> o<br>
+            <a href="http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21', 'versione Kindle');">versione Kindle</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0071CW080" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese). Personalmente ho acquistato la versione Kindle perchè, a differenza di altri libri dove la differenza è trascurabile, qua la versione kindle costa 1/4 dell’altra.<br>
+            <span id="more-316"></span><br>
+        </p></section>
+    <section>
+        <h1 id="javaserver-pages-jsp-22">JavaServer Pages (JSP) 2.2</h1>
+        <p>E’ una tecnologia di programmazione per il web in Java, che permette di risolvere alcuni dei problemi intrinsechi delle Servlet, ovvero:<br>
+            – scomodità di scrivere codice HTML all’interno di classi Java<br>
+            – necessità di scrivere testi ed HTML all’interno del codice (<em>hardcoded</em>), che porta a ricompilazioni delle classi ad ogni cambiamento nella logica di presentazione.<br>
+            – necessità di scrivere un deployment descriptor o l’annotazione @WebServlet per mappare l’url.</p>
+        <p>Una pagina JSP è una Servlet che non va compilata, ma viene eseguita da un <em>JSP Container</em> (i Servlet container come Tomcat sono anche JSP Container). </p>
+        <p><strong>Alla prima richiesta</strong> che una pagina JSP richiede viene creata (tradotta) una classe che implementa <em>JspPage</em> o <em>HttpJspPage</em>, una sottointerfaccia di <em>javax.servlet.Servlet</em>, che ha il normale ciclo di vita di una Servlet qualsiasi.</p>
+        <p><strong>Durante le richieste successive</strong> , se la pagina Jsp non è stata modificata viene eseguita la classe Servlet tradotta in precedenza e già in memoria (in questo modo il tutto avviene più rapidamente).</p>
+        <p>Il problema della prima esecuzione “più lenta” può essere risolto in fase di configurazione, impostando l’applicazione in modo che all’avvio venga generata la classe Servlet, come se fosse stata fatta richiesta della Jsp.</p>
+        <h2 id="il-contenuto-di-una-pagina-jsp">Il contenuto di una pagina Jsp</h2>
+        <p>Una pagina Jsp è una normale pagina al cui interno posso utilizzare dei tag particolari, che richiamano funzionalità della logica di Business in Java:</p>
+        <p><strong>Esempi</strong><br>
+            <em>&lt;% echo 3+2; %&gt;</em><br>
+            <em>&lt;%@ page import=”java.util.date %&gt;</em><br>
+            <em>&lt;%– commento di una servlet –%&gt;</em> (a differenza dei commenti <!-- html --> normali, questo non viene mostrato nel codice HTML della pagina presentata all’utente.</p>
+        <p>Solitamente una Servlet è una pagina HTML (document-type:text/html): posso sempre cambiarlo con response.setContentType se mi serve una pagina di qualche altro tipo.</p>
+        <p>All’interno del codice delle Servlet posso fare riferimento ad alcuni oggetti cosiddetti impliciti, disponibili in ogni pagina, ad esempio <em>irequest, response, out, session, application, config, page</em>.</p>
+        <p>Inoltre all’interno della Servlet posso <em>salvare degli attributi</em>, cioè oggetti che richiamerò in seguito. E’ possibile salvare a 4 differenti livelli o scope: page, request, session e application. Questo argomento sarà approfondito in seguito.</p>
+        <h2 id="le-direttive">Le direttive</h2>
+        <p>Sono dei tag Jsp particolari, si usano per dare informazioni al traduttore di pagine Jsp in Servlet su aspetti quali dimensione implicit object, content type, eventuali classi da importare, eccetera.<br>
+            Hanno la forma del tipo &lt;%@page attrib1=”value1″ .. %&gt;, ad esempio:</p>
+        <ul>
+            <li><em>&lt;%@page import=”java.util.list,java.util.arraylist” %&gt;</em> per importare delle classi che utilizzerò nel mio Jsp</li>
+            <li><em>&lt;%@page session=”true” %&gt;</em> per specificare che questa pagina partecipa all’HttpSession, creando l’oggetto se non esiste già</li>
+            <li><em>&lt;%@page content-type=”text/json” %&gt;</em> per specificare un content type diverso da quello di default text/html</li>
+            <li><em>&lt;%@page pageEnconding=”UTF-8″ %&gt;</em> per specificare un enconding</li>
+            <li><em>&lt;%@page session=”true” %&gt;</em> per specificare che questa pagina partecipa all’HttpSession, creando l’oggetto se non esiste già</li>
+            <li><em>&lt;%@page isErrorPage=”true” %&gt;</em> per specificare che questa è una pagina di errore</li>
+            <li><em>&lt;%@page errorpage=”nome_error_page” %&gt;</em> per specificare quale pagina di errore utilizzerà questa Jsp</li>
+        </ul>
+        <p>Esistono poi le <strong>include directive</strong>, che permettono di inserire il contenuto di un’altra pagina Jsp nella pagina Jsp nella quale sono utilizzate:</p>
+        <p>&lt;%@include file=”url_fragment” %&gt;</p>
+        <p>Per convenzione le pagine importate vengono chiamati fragments ed hanno estensione <em>.jspf</em> o <em>.html</em> nel caso si tratti di pagine statiche.</p>
+        <h2 id="scripting-elements">Scripting elements</h2>
+        <p>Le pagine Jsp ne prevedono 3 tipi:</p>
+        <h3 id="scriplets">Scriplets</h3>
+        <p>Sono blocchi di codice Java, con uno scope unico all’interno di una pagina Jsp. Sono il tipo più elementare ma sono sconsigliate, è preferibile utilizzare uno degli altri approcci, ed addirittura disattivare le Scriplets tramite il tag <scripting-invalid>true</scripting-invalid> all’interno del Deployment Descriptor.</p>
+        <p><strong>Esempio</strong>:<br>
+            &lt;% echo “ciao”; %&gt;</p>
+        <h3 id="declarations">Declarations</h3>
+        <p>Vengono utilizzati per definire classi o funzioni all’interno della pagina Jsp. Come best practice le declarations andrebbero fatte in cima alla pagina Jsp e poi utilizzate dopo. </p>
+        <p><strong>Esempio</strong>:<br>
+            &lt;%!public string getCiao() { /<em> code </em>/ } %&gt;</p>
+        <p>Un utilizzo peculiare delle declarations è l’override delle funzioni init() e destroy() della Servlet tradotta dalla Jsp.</p>
+        <h3 id="expressions">Expressions</h3>
+        <p>Sono delle espressioni dirette, stampo qualcosa senza ricorrere ad un echo dentro una scriplets, riportano direttamente il risultato nell’output della pagina. Saranno approfondite in seguito quando si parlerà di Expression Language.<br>
+            <strong>Esempio</strong>:<br>
+            &lt;%= calc.getTime() %&gt;</p>
+        <h2 id="azioni">Azioni</h2>
+        <p>Sono il terzo tipo di elementi sintattici previsti dalle Jsp dopo le direttive e gli scripting elements. Le azioni sono operazioni tradotte in codice java quali accesso ad un oggetto o invocazione di un metodo.</p>
+        <p><jsp:azione parametri=""></jsp:azione></p>
+        <p>Esempi di azioni: useBean, setProperty, getProperty, include, forward.</p>
+        <p><strong>Attenzione</strong><br>
+            C’è una differenza tra la include action e la include directive: mentre la prima è processata a run-time, la seconda era processata a translation time, cioè inserisce dentro il codice stesso il codice sotto forma di una serie di out.write(“..:”).</p>
+        <p>L’action invece richiama il risultato dell’oggetto (pagina HTML, JSP, Servlet) all’interno dell’output presentato all’utente, è come se fosse una chiamata di funzione, richiamo del codice e mi viene restituito il suo risultato.</p>
+        <p><strong>Forward</strong><br>
+            E’ particolarmente importante l’azione forward, che permette  di rimandare l’utente ad una risorsa differente, viene ad esempio utilizzata per reindirizzare l’utente alla pagina di login se cerca di accedere ad una pagina che necessita il login e lui non lo ha ancora fatto.</p>
+        <h2 id="gestione-degli-errori">Gestione degli errori</h2>
+        <p>Le JSP supportano la gestione degli errori attraverso try .. catch e attraverso la definizione, con l’apposita direttiva, di una pagina di errore che si occupi di gestire le pagine non gestite.<br>
+            Il discorso è affrontato nel dettaglio nel libro, con tanto di esempi.</p>
+    </section>
+    <hr>
+    <section>
+        <p>Presto ci sarà un altro articolo con altri estratti e riassunti dal libro. Se non volete aspettare potete acquistare il libro  <a href="http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21', ' versione cartacea');"> versione cartacea</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0980839629" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> o<br>
+            <a href="http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21', 'versione Kindle');">versione Kindle</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0071CW080" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese). </p></section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

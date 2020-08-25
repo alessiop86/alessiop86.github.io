@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>DIGITS - 2nd lesson of NVIDIA Deep Learning course</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body class="article">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <h1>DIGITS - 2nd lesson of NVIDIA Deep Learning course</h1>
+
+    <h2>THE CLASS</h2>
+    <p>The 2nd lesson of&nbsp;<a href="https://developer.nvidia.com/deep-learning-courses" target="_blank" rel="nofollow">NVIDIA’s free course on Deep Learning</a>&nbsp;was about DIGITS. DIGITS is an open source tool built from NVIDIA to design, visualize, train and test Deep Neural Networks (DNN) for the Caffe framework&nbsp;(<em>please read my appeal at the end of the article</em>).</p>
+    <p>The lesson starts&nbsp;with&nbsp;a quick overview &nbsp;about the tool and its functionality:</p>
+    <ul>
+        <li>Creation of datasets, automatic or manual split of the dataset in training, validation and (optional) test datasets</li>
+        <li>Visualization of a block diagram representation of DNNs (in the Lab paragraph I’ll talk about how the diagram&nbsp;helped me out when I had made a mistake on the network design)</li>
+        <li>Real-time visualization of informations and graphs during the training of the model, with some examples on how recognize an overfitting and underfitting patterns from the evolution of Loss and Accuracy, and how to&nbsp;recover from these situations by adjusting the training parameters (for example the Base Learning Rate)</li>
+        <li>Parallel training of&nbsp;distinct DNN networks in multi-GPU systems (unfortunately I have not a multi-GPU configuration, but I think the parallel training is an important feature:&nbsp;since finding the right architecture for a DNN is a task that requires an iterative fine-tuning approach, &nbsp;achieving&nbsp;parallelization is crucial, especially considering the slowness of each iteration)</li>
+    </ul>
+    <p>The course proceed with some indications on&nbsp;how to install DIGITS on your&nbsp;system and the hardware and software requirements for the installation (you are not going to require anything to play with DIGITS in the lesson’s Lab, as&nbsp;in the&nbsp;<a href="https://www.linkedin.com/pulse/1st-lesson-nvidia-deep-learning-course-alessio-piergiacomi">first lesson</a>&nbsp;you will be provided with a cloud environment running on AWS Linux GPU Instance with all the required software installed and ready for the use).</p>
+    <p>In the final part of the lesson there is a quick overview on all the screens and functionality offered by DIGITS, and on what&nbsp;you will be requested to do&nbsp;during the&nbsp;subsequent lab.</p>
+    <p>I found interesting the part about Data Augmentation: if my training data set includes&nbsp;only numbers&nbsp;with white background, will the trained model be able to recognize the same number&nbsp;on a colored or black background? Quick answer: no, it will not, but the class provides&nbsp;practical instructions on how to address the issue.</p>
+    <p>After the introductory lesson, this was the first “practical” class&nbsp;of the course and I liked it more than the previous&nbsp;one, even if the sound quality and the volume of the recording were very&nbsp;poor.</p>
+    <h2>THE&nbsp;LAB</h2>
+    <p>After a waiting a couple of minutes for the initialization of the remote&nbsp;environment, you will be redirect to an IPython notebook webpage, containing all the instructions on the 5 tasks composing the lab. You will need to perform the tasks using the DIGITS web-gui. You will be able to play around with DIGITS for around 2 hours, then the lab will expire.</p>
+    <p>The tasks you are going to perform include dataset creation, creation of 1 default&nbsp;and 2 customized image classification models, training and test of such&nbsp;models.</p>
+    <p>You are going to use the&nbsp;<a href="http://yann.lecun.com/exdb/mnist/" target="_blank">MNIST</a> database of handwritten digits (available on the machine) to create a dataaset and try to recognize some images of digits that are not part of the dataset.</p>
+    <p>The network architecture you are going to use is one of the three default “famous” networks&nbsp;provided by DIGITS: in particular it’s a version of&nbsp;<a href="http://yann.lecun.com/exdb/lenet/" target="_blank">LeNet</a> network, a 1990s network pretty simple if compared to newer networks, such as AlexNet (2012), GoogleNet (2014) and VGG (2014). Having a such simple network allows you to keep an high value for the batch size parameter (the number of the images processed at a time in the network): you will be able to track the RAM usage of the process during the training:&nbsp;you will nowhere get close to the 4GB limit&nbsp;of the provided hardware.</p>
+    <p>Beginning&nbsp;with a simple network&nbsp;allows to iterate the training an higher number of times: you can set how many times the whole dataset will be ingested by the network through the parameter “Training Epochs”. You will start with 30 epochs in task #2, but as soon as you will add complexity to the network (tasks #3 and #4) you will have to&nbsp;decrease the number of epochs. In task #3 you are prompted to set the number of epochs to 2, I did so but the network I had trained performed poorly: I could anticipate it just by looking at the training indicators: the model had not reached an optimal validation accuracy rate, probably because I was unlucky with random weight initialization and 2 epochs were not enough to recover from such situation…</p>
+    <p>One last thing about the lab: the instructor was right during the lesson about the importance of network's diagram visualization! While editing the network to complete one of the tasks, I had made some mistake, resulting in a convolutional layer not leading anywhere. Looking at the diagram it was evident that something was wrong (in the image below, the network on the left has a split leading to a dead end), so I double checked the network definition, found the mistake, fixed it, and finally obtained the correct arrangement for the network (the right network in the image below).</p>
+    <p><img src="img.png"></p>
+    <p style="text-align: left;">One last thing about the lab: the instructor was right during the lesson about the importance of network’s diagram visualization! While editing the network to complete one of the tasks, I had&nbsp;made some mistake,&nbsp;resulting in a convolutional layer not leading anywhere. Looking at&nbsp;the diagram it was evident that something was wrong (left network displays a split leading to&nbsp;a dead end in my network, so I double checked the network definition, found the mistake, fixed it,&nbsp;and finally obtained the correct arrangement for the network (the right network in the image).</p>
+    <h2>THE FINAL APPEAL</h2>
+    <p>I have tinkered with few Deep Learning networks and frameworks over the past months, and&nbsp;as far I have seen DIGITS is the most user-friendly training tool I encountered. Unfortunately it only train models for the <a href="http://caffe.berkeleyvision.org/" target="_blank">Caffe framwork</a>, so if you are not using Caffe&nbsp;for your Deep Learning projects, you have two options: forgetting about DIGITS or using some static or real-time conversion tool in order to use Caffe’s models with the others Deep Learning frameworks.</p>
+    <p>I have seen there are some interesting projects in this area for <a href="https://github.com/kitofans/caffe-theano-conversion" target="_blank">Theano</a>&nbsp;and <a href="https://github.com/szagoruyko/loadcaffe" target="_blank">Torch7</a>. Unfortunately there is not such tool for other less famous frameworks like <a href="http://libccv.org/doc/doc-convnet/" target="_blank">libccv</a> and <a href="https://github.com/jetpacapp/DeepBeliefSDK" target="_blank">DeepBeliefSDK</a>*. Such frameworks have very bad or non-existing training tools, so tried to do some work in this direction:&nbsp;<a href="https://github.com/alessiop86/ccv/tree/unstable/model_conversion" target="_blank">I improved an hidden conversion feature to translate models from libccv to DeepBeliefSDK</a>&nbsp;and I started&nbsp;the creation of a <a href="https://github.com/alessiop86/caffe-to-libccv-model-converter" target="_blank">tool to convert caffe models in libccv format</a> (or at least some of them, some caffe models could be not straight-translatable into ccv format). Unfortunately I am not a great low level programmer (I know few programming languages, but I am definitely not a C/C++ engineer), and I have also run out of time, so I discontinued the project when it was (I think) close to its end…</p>
+    <p>So the appeal is this:<strong> I am hoping someone will&nbsp;continue my caffe-to-libccv conversion tool and complete it</strong>, allowing&nbsp;developers to write their own libccv/DeepBeliefSDK applications using models trained with DIGITS and translated immediately after. Feel free to contact me and&nbsp;ask informations on what it is missing to do and which were the issues that blocked me.</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>*this one has been discontinued from its creator, but at the moment it has a very good iOS implementation and also a working (I personally contributed with some fixes) yet less performant Android implementation (still better than the <a href="https://github.com/sh1r0/caffe-android-lib" target="_blank">caffe-for-android</a>&nbsp;project, that requires 2GB ram for the AlexNet-like network and has other flaws).<br>
+        I worked to a prototype for a stillborn startup in the last year, and I shared with&nbsp;<a href="https://www.linkedin.com/in/francescopugliese77" target="_blank">Francesco Pugliese</a>&nbsp;the vision that<em> Deep Learning tasks should not be segregated into cloud datacenters</em>, they should&nbsp;be everywhere, on everyday devices (while today it’s questionable if we have enough distributed computing power to do so, Moore’s law and exponential grow&nbsp;support&nbsp;our vision). In this setting, the importance of DeepBeliefSDK is evident (until the creation of another optimized framework for running Deep Learning classification tasks on low power devices).</p>
+    <p></p>
+
+
+
+
+
+    <ul id="navlist">
+        <li class="home"><a href="http://alessio.engineer">Home</a></li>
+        <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+        <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+        <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+        <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Design Patterns: Elements of Reusable Object-Oriented Software (Introduction)</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>Design Patterns: Elements of Reusable Object-Oriented Software (Introduction)</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/en/design-patterns-elements-of-reusable-object-oriented-software/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Design Patterns: Elements of Reusable Object-Oriented Software" src="http://www.summarify.com/wp-content/uploads/2013/03/design_patterns_gof.png" width="300" height="267"></div>
+        <p><strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> is the first and probably the most famous book about the <strong>Design pattern</strong>. It was first published in 1995, but thankfully those design patterns are still valid nowadays, the only outdated thing in this book may be the <strong>Smalltalk</strong> programming language, used in some examples. Anyway this book is still very good and popular: in fact I have decided to read this book when, in a job listing, it was expressly requested the knowledge of design patterns and of this book!</p>
+        <p>I will write a series of 15 articles about this book, making the summary of a couple chapters of this book in each one (the book is pretty big, it has over 500 pages). To deepen your knowledge of the argument, you can always buy the <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'book @ Amazon');">book @ Amazon</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.<br>
+            <span id="more-182"></span><br>
+        </p></section>
+    <section>
+        <h1>The design patterns</h1>
+        <p>The design patterns were born the moment in which some good software architects realised that making the <strong>perfect design</strong> at the first attempt was pretty  difficult if not impossible at all.</p>
+        <p>The perfect design was supposed to be as flessible and as reusable as possible, unfortunately a such design was (almost) obtained after at least a couple of refactorization cycles: it was crucial to be abele to reuse good solution, what have worked in the past for the new projects.</p>
+        <p>The design patterns are exactly this: they are “<strong>previous good solutions, applicable to a family of problems and situations with some traits in common”</strong>.<br>
+            Four computer scientist collected the most used design patterns (as far as I know they did not really <em>invented</em> them), in a comprehensive book, that had become really popular in the subsequent years. Those computer scientist are now know as the <strong>Gang of Four</strong> or GoF, even if they do not even know exactly the reason, and the book is commonly referred to as “The Gang of Four Design Patterns”.</p>
+        <h2>Are all the design patterns similar?</h2>
+        <p>No. In fact they are divided by the Gang of Four in three groups, with different purposes. These groups are <em>Creational patterns, Structural patterns and Behavioral patterns</em>.</p>
+        <h3>Creational patterns</h3>
+        <p>They are related to the creation of objects. Each one amongst the pattern will be somewhen introduced in one of the articles of this series, now I will just list them:</p>
+        <blockquote><p>Factory method, Abstract Factory, Builder, Prototype, Singleton</p></blockquote>
+        <h3>Structural patterns</h3>
+        <p>The structural patterns are related to the composition of classes or objects. They are:</p>
+        <blockquote><p>Adapter, Bridge, COmposite, Decorator, Faced, Flyweight, Proxy</p></blockquote>
+        <h3>Behavioral patterns</h3>
+        <p>Those patterns regulate the interation between classes or objects. They are:</p>
+        <blockquote><p>Interpreter, Templated Method, Chain of Reponsibility, Command, Iterator, Mediator, Memento, Observer, State, Strategy, Visitor</p></blockquote>
+        <h2>Principles behind the design patterns</h2>
+        <p>The key is to <strong>program to an interface, not an implementation</strong>, trying whenever is possible <strong>to do not declare variables to be instances of particular concrete class</strong>. In this way the client remain unaware of the specific types of objects they use, they just refer to the interface.</p>
+        <p>Another key principle is <strong>favor object composition over class inheritance</strong>, because the latter breaks encapsulation and can not be defined dynamically at run time, with dynamic references to other objects.</p>
+        <p>The <strong>delegation</strong> is a way of empowering composition as far as concern the reusability. In delegation, each request to an object called is forwarded to another object, the <strong>delegate</strong>.</p>
+    </section>
+    <hr>
+    <section>
+        In the next article of this series, we will introduce the first Design Patterns, <strong>Composition</strong> and <strong>Strategy</strong>.<p></p>
+        <p>If you want further information about the introduction to design pattern I have summarized in this article, I suggest you to purchase the GoF book in the <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'Amazon online store');">Amazon online store</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.</p></section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

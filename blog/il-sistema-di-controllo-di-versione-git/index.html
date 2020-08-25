@@ -1,0 +1,105 @@
+<html>
+<head>
+    <title>[Italian] Il sistema di controllo di versione Git</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] Il sistema di controllo di versione Git</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/">old blog</a>)</small></small>
+
+        <article id="post-286" class="post-286 post type-post status-publish format-standard hentry category-ita">
+
+            <div class="entry-content">
+                <p>L’articolo di oggi è un semplice elenco con spiegazione dei più comuni comandi del sistema di controllo di versione Git (che personalmente preferisco a SVN).<span id="more-286"></span><br>
+                    Se volete approfondire l’argomento sono presenti diversi libri su Amazon dedicati solo a Git, per nessuno di loro però è presente una traduzione italiana, sono tutti in lingua inglese:</p>
+                <p><iframe src="http://rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=summarify-21&amp;o=29&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=1449316387" style="width: 120px; height: 240px; float: left; padding: 10px; margin-right: 10px; display: none !important;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe><br>
+                    <iframe src="http://rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=summarify-21&amp;o=29&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=1430218339" style="width: 120px; height: 240px; float: left; padding: 10px; margin-right: 10px; display: none !important;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe><br>
+                    <iframe src="http://rcm-it.amazon.it/e/cm?lt1=_blank&amp;bc1=000000&amp;IS2=1&amp;bg1=FFFFFF&amp;fc1=000000&amp;lc1=0000FF&amp;t=summarify-21&amp;o=29&amp;p=8&amp;l=as4&amp;m=amazon&amp;f=ifr&amp;ref=ss_til&amp;asins=B0067QNR56" style="width: 120px; height: 240px; float: left; padding: 10px; display: none !important;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe></p>
+                <div style="clear:both">
+                </div>
+                <section>
+                    <h1>I comandi di Git</h1>
+                    <p>Salto il discorso relativo all’impostazione nome utente password alla prima apertura della shell git.</p>
+                    <h2>Inizializzazione repository</h2>
+                    <p>Ci sono diversi modi di inizializzare un repository Git:</p>
+                    <h3>git init</h3>
+                    <p>E’ il metodo più semplice, mi posiziono su una cartella e creo un nuovo repository (locale). Git crea una cartella .git e da ora in poi sono disponibili tutti i comandi git all’interno di quella cartella. Se poi voglio sincronizzarlo con un’origine remota dovrò scrivere</p>
+                    <p><strong>git remote add origin PROTOCOLLO://NOME@INDIRIZZO</strong></p>
+                    <h3>git clone PROTOCOLLO://NOME@INDIRIZZO [NOME_REPOSITORY_LOCALE]</h3>
+                    <p>Comprende l’init, la sincronizzazione con un’origine remota, ne scarica tutto il contenuto e fa il checkout nel branch attivo. Se vogliamo entrare in un progetto opensource già avviato, questo è il comando da utilizzare</p>
+                    <h2>Utilizzo locale del repository</h2>
+                    <h3>git checkout [NOMEBRANCH|HASH COMMIT]</h3>
+                    <p>I file vengono aggiornati allo stato nel branch o del commit specificato. I commit in git sono identificati da un hash, oltre dal messaggio specificato dall’utente, ma possono essere richiamati solo per hash, non tramite il messaggio (giustamente, quest’ultimo non è univoco).</p>
+                    <h3>git branch</h3>
+                    <p>Mostra la lista del branch, evidenziando con un * al fianco del nome quello attivo</p>
+                    <h3>git branch [nomebranch]</h3>
+                    <p>Passa al branch <em>nomebranch</em>, se non esiste, lo crea.</p>
+                    <h3>git branch -d nome_branch</h3>
+                    <p>Elimina il branch nome_branch.</p>
+                    <h3>git add nomefile</h3>
+                    <p>Aggiunge un certo file all’indice (insieme di tutti i file che saranno compresi nel prossimo commit).</p>
+                    <h3>git add .</h3>
+                    <p>Aggiunge tutti i file nella working directory (tranne quelli ovviamente da escludere secondo il .gitignore file) all’indice.</p>
+                    <h3>git commit -m “messaggio”</h3>
+                    <p>Esegue il commit dei file indicizzati e modificati</p>
+                    <h3>git merge nome_branch_sperimentale</h3>
+                    <p>Esegue il merge tra il branch corrente e il branch chiamato <em>nome_branch_sperimentale</em>. Nel merge il codice viene inserito dove possibile, dove invece ci sono conflitti da risolvere viene lasciato a noi il compito di stabilire a mano, quale delle due versioni coinvolte nel merge vada tenuta e quale scartata.</p>
+                    <h3>git rebase master</h3>
+                    <p>E’ una specie di merge, ma allo stesso tempo sposta proprio il branch, innestandolo all’interno di un altro.</p>
+                    <h3>git reset –hard HASH_COMMIT</h3>
+                    <p>Elimina tutti i cambiamenti non committati e porta la situazione a quella del commit identificato da HASH_COMMIT. Ad essere onesto non capisco la differenza tra un git reset –hard ed un checkout.</p>
+                    <h3>git log [master] [–pretty=oneline]</h3>
+                    <p>Questo mostra tutti i commit effettuati su un certo branch, il secondo parametro serve a ottenere una visualizzazione più compressa e più leggibile (soprattutto nel caso i commit siano molti, cioè il branch non sia “nuovo”)</p>
+                    <h3>git diff [&gt;patch_file]</h3>
+                    <p>Salva le differenze tra la versione corrente dei file e l’ultimo commit nel patch file</p>
+                    <h3>patch -p1 &lt; patch_file</h3>
+                    <p>Applica il patch_file alla versione corrente. Non richiede Git. In alternativa posso avere lo stesso risultato utilizzando invece git con il comando</p>
+                    <p><strong>git apply patch_file</strong></p>
+                    <h3>git show [BRANCH/HASH COMMIT]</h3>
+                    <p>Mostra tutte le informazioni relative all’oggetto specificato come aprametro</p>
+                    <h3>git stash</h3>
+                    <p>Salva tutti i cambiamenti uncommited, in modo da permettermi di cambiare branch senza perderli, e poi riprenderli in seguito, utilizzando<br>
+                        <strong>git stash apply stash@{0}</strong> (l’ultimo parametro identifica lo stash).</p>
+                    <h2>Utilizzo di git in modo distribuito</h2>
+                    <h3>git fetch origin</h3>
+                    <p>Scarica gli aggiornamenti remoti al repository sulla mia versione locale.</p>
+                    <h3>git pull origin [BRANCH]</h3>
+                    <p>Esegue un fetch seguito da un merge.</p>
+                    <h3>git push origin [BRANCH]</h3>
+                    <p>Esegue una aggiornamento in remoto del repository utilizzando le modifiche locali<br>
+                    </p></section>
+                <p>Con questo si conclude questa breve introduzione ai comandi di Git. Git è molto semplice per le operazioni base, ma offre anche funzionalità molto avanzate grazie alle opzioni più complesse, che qua non ho trattato. Se volete approfondire l’argomento, vi riporto i link ai tre libri più venduti sull’argomento su Amazon italia:</p>
+                <ul>
+                    <li>
+                        <a href="http://www.amazon.it/gp/product/1449316387/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1449316387&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1449316387/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1449316387&amp;linkCode=as2&amp;tag=summarify-21', 'Version Control With Git: Powerful Tools and Techniques for Collaborative Software Development');">Version Control With Git: Powerful Tools and Techniques for Collaborative Software Development</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=1449316387" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"></li>
+                    <li><a href="http://www.amazon.it/gp/product/B0067QNR56/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0067QNR56&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0067QNR56/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0067QNR56&amp;linkCode=as2&amp;tag=summarify-21', 'Distributed Version Control with Git');">Distributed Version Control with Git</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0067QNR56" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"></li>
+                    <li><a href="http://www.amazon.it/gp/product/1430218339/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1430218339&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1430218339/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1430218339&amp;linkCode=as2&amp;tag=summarify-21', 'Pro Git');">Pro Git</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=1430218339" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"></li>
+                </ul>
+            </div><!-- .entry-content -->
+
+            <footer class="entry-meta">
+                Questo articolo è stato pubblicato in <a href="http://www.summarify.com/category/ita/" rel="category tag">Italiano</a> il <a href="http://www.summarify.com/ita/il-sistema-di-controllo-di-versione-git/" title="7:47 am" rel="bookmark"><time class="entry-date" datetime="2013-04-06T07:47:41+00:00">06/04/2013</time></a><span class="by-author"> da <span class="author vcard"><a class="url fn n" href="http://www.summarify.com/author/admin/" title="Visualizza tutti gli articoli di admin" rel="author">admin</a></span></span>.								</footer><!-- .entry-meta -->
+        </article><!-- #post -->
+
+
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

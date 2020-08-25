@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>[Italian] Design Patterns: i patterns creazionali secondo la Gang Of Four</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] Design Patterns: i patterns creazionali secondo la Gang Of Four</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/design-patterns-i-pattern-creazionali-secondo-la-gang-of-four/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Design Patterns: Elements of Reusable Object-Oriented Software" src="http://www.summarify.com/wp-content/uploads/2013/03/design_patterns_gof.png" width="300" height="267"></div>
+        <p><strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> è stata la prima raccolta comprensiva dei <strong>Design pattern</strong> per la progettazione di software utilizzando la progettazione ad oggetti all’insegna della massima flessibilità e riusabilità del codice. </p>
+        <p>I design pattern sono infatti dei pattern, delle soluzioni generiche da applicare in determinati casi, soluzioni eleganti architetturali ottimizzate all’insegna appunto della flessibilità, della riusabilità.</p>
+        <p>Il libro pubblicato nel 1995, è oggi ancora attuale (tranne forse nel linguaggio utilizzato per gli esempi, lo Smalltalk), ed è tra i più popolari libri sui design pattern (ne esistono molti). In particolare ho deciso di scrivere questa serie di articoli dopo aver letto, su un annuncio di lavoro, che veniva espressamente richiesta la conoscenza dei design pattern definiti dai GoF, ovvero i design pattern definiti in questo libro <span id="more-219"></span> (il libro è stato scritto da quattro differenti autori, successivamente conosciuti  come Gang Of Four, abbreviato in GoF).</p>
+        <p>Nel libro, i design pattern vengono suddivisi in 3 categorie:</p>
+        <ul>
+            <li>Design pattern creazionali</li>
+            <li>Design pattern strutturali</li>
+            <li>Design pattern comportamentali</li>
+        </ul>
+        <p>In questo primo articolo saranno affrontati i <strong>design pattern creazionali</strong>. Per approfondire la tua conoscenza dell’argomento, puoi acquistare il <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'libro in inglese');">libro in inglese</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> oppure la sua <a href="http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21', 'Versione in italiano');">Versione in italiano</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=887192150X" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.<br>
+        </p></section>
+    <section>
+        <h1>I design pattern creazionali</h1>
+        <p>I design pattern creazionali sono quei design pattern legati alla creazione (istanziazione) di oggetti, in modo che questi siano riutilizzabili o addirittura intercambiabili.</p>
+        <h2>Factory (o Factory method)</h2>
+        <p>Questo pattern prevede un’oggetto, la <strong>Factory</strong> che abbia la responsabilità, attraverso vari metodi <strong>Factory Methods</strong> di instanziare oggetti che appartengono alla stessa famiglia, cioè simili tra loro, che condividono una stessa interfaccia, l’<strong>AbstractProduct</strong>, che in pratica sono istanze di vari <strong>Concrete Products</strong> differenti, uno per ogni factory methods.</p>
+        <p>Questo pattern permette di isolare eventuali client dal tipo di implementazione del Product.</p>
+        <h2>Abstract Factory</h2>
+        <p>E’ un pattern che aggiunge un ulteriore livello di astrazione al pattern <strong>Factory method</strong>: ora non esiste più una singola Factory, ma un’insieme di <strong>ConcreteFactory</strong>, tutte le con la stessa interfaccia <strong>AbstractFactory</strong> e che sono in grado di generare <strong>ConcreteProducts</strong> differenti ma che implementano la stessa interfaccia.</p>
+        <p>E’ un pattern un pò complesso da implementare, ma permette una grande flessibilità: posso modificare le classi concrete andando a modificare la ConcreteFactory da invocare, anche a run-time.</p>
+        <h2>Builder</h2>
+        <p>Utilizzo una AbstractFactory (rinominata per l’occasione <strong>Builder</strong>, per produrre le varie parti di un oggetto complesso, e successivamente utilizzo un oggetto chiamato <strong>Constructor</strong> per mettere assieme le parti realizzate dal Builder effettuando una composizione dell’oggetto (complesso) desiderato.</p>
+        <p>Posso passare al Constructor come parametro il Builder e questo si occuperà sia della creazione che della composizione.</p>
+        <p>E’ un algoritmo utile quando ho oggetti complessi con parti che potrebbero essere interscambiate, oppure voglio mantenere separata la creazione delle singole parti dalla creazione dell’oggetto complesso</p>
+        <h2>Prototype</h2>
+        <p>E’ un design pattern che prevede la creazione di nuove istanze attraverso la clonazione di un oggetto (il prototipo). E’ particolarmente utile quando voglio istanziare in modo veloce una classe molto grande, caricata dinamicamente in precedenza. Il prototipo è una classe stratta o un’interfaccia, in Java dovrà implementare Clonable.</p>
+        <p>L’inconveniente di questo design pattern è la necessità di implementare l’operazione di clonazione che può essere difficile nel caso di oggetti con riferimenti circolari al loro interno, o con oggetti non copiabili.</p>
+        <p>Un esempio di applicazione di questo design pattern è per implementare una transazione: faccio una copia, quando la transazione è avvenuta correttamente sostituirò la copia all’originale, non prima.</p>
+        <p>Esiste una variante di questo pattern che prevede un <strong>PrototypeManager</strong> che tenga traccia dei differenti tipi di prototipi disponibili (tipi clonabili).</p>
+        <h2>Singleton</h2>
+        <p>E’ un pattern che prevede la dichiarazione del costruttore di una classe come privato, in modo che tale classe sia non istanziabile da client esterni, e allo stesso tempo la definizione di un metodo per creare un’unica istanza della classe, richiamata ogni volta che ce ne sarà bisogno. All’interno di tale metodo, il costruttore privato risulta visibile, quindi la classe è istanziabile: spetta al metodo per richiamare l’istanza della classe assicurarsi che la classe venga istanziata una volta sola, e salvata in un attributo statico (di classe).<br>
+        </p></section>
+    <hr>
+    <section>
+        Nel prossimo articolo saranno trattati i design pattern strutturali. <p></p>
+        <p>Se desideri maggiori informazioni sui design pattern creazionali, ti suggerisco di acquistare il <a href="http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21', 'libro della GoF');">libro della GoF</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=887192150X" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (al miglior prezzo).</p>
+    </section></div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

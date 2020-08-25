@@ -1,0 +1,92 @@
+<html>
+<head>
+    <title>[Italian] Design Patterns: i patterns strutturali secondo la Gang Of Four</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] Design Patterns: i patterns strutturali secondo la Gang Of Four</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Design Patterns: Elements of Reusable Object-Oriented Software" src="http://www.summarify.com/wp-content/uploads/2013/03/design_patterns_gof.png" width="300" height="267"></div>
+        <p><strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> è stata la prima raccolta comprensiva dei <strong>Design pattern</strong> per la progettazione di software utilizzando la progettazione ad oggetti all’insegna della massima flessibilità e riusabilità del codice. </p>
+        <p>I design pattern sono infatti dei pattern, delle soluzioni generiche da applicare in determinati casi, soluzioni eleganti architetturali ottimizzate all’insegna appunto della flessibilità, della riusabilità.</p>
+        <p>Il libro pubblicato nel 1995, è oggi ancora attuale (tranne forse nel linguaggio utilizzato per gli esempi, lo Smalltalk), ed è tra i più popolari libri sui design pattern (ne esistono molti). In particolare ho deciso di scrivere questa serie di articoli dopo aver letto, su un annuncio di lavoro, che veniva espressamente richiesta la conoscenza dei design pattern definiti dai GoF, ovvero i design pattern definiti in questo libro <span id="more-226"></span> (il libro è stato scritto da quattro differenti autori, successivamente conosciuti  come Gang Of Four, abbreviato in GoF).</p>
+        <p>Nel libro, i design pattern vengono suddivisi in 3 categorie:</p>
+        <ul>
+            <li>Design pattern creazionali</li>
+            <li>Design pattern strutturali</li>
+            <li>Design pattern comportamentali</li>
+        </ul>
+        <p>In questo secondo articolo saranno affrontati i <strong>design pattern strutturali</strong>. Per approfondire la tua conoscenza dell’argomento, puoi acquistare il <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'libro in inglese');">libro in inglese</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> oppure la sua <a href="http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21', 'Versione in italiano');">Versione in italiano</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=887192150X" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.<br>
+        </p></section>
+    <section>
+        <h1>I design pattern strutturali</h1>
+        <p>I design pattern strutturali sono quei design pattern che forniscono un modo semplice per realizaare relazioni tra entità: descrivono in che modo gli oggetti possono essere combinati per creare strutture complesse.</p>
+        <p>All’interno di questo insieme di pattern si potrebbe distinguere ulteriormente tra quei pattern che riguardano la combinazione di classi, realizzata utilizzando principalmente l’ereditarietà e quei pattern che riguardano l’associazione e l’aggregazione di oggetti per formare strutture complesse.</p>
+        <h2>Adapter (o Wrapper)</h2>
+        <p>Permette di traslare l’interfaccia di una classe in un’altra interfaccia: in pratica realizza una compatibilità tra interfacce che nativamente non era presente.</p>
+        <p>E’ un pattern utilizzato quando una classe offre delle funzionalità che risolvono specifici problemi, ma non implementa l’interfaccia che mi serve.</p>
+        <p>Si implementa scrivendo una classe <strong>Adapter</strong> che implementi l’interfaccia desiderata e mappi tali metodi in chiamate alla classe che volevo adattare, chiamata in letteratura <strong>Adaptee</strong>. Questo mapping può avvenire in due metodi, o attraverso l’ereditarietà o attraverso la composizione.</p>
+        <h2>Bridge</h2>
+        <p>Disaccoppia un’interfaccia o una classe astratta dalla sua implementazione, in modo che quest’ultima sia libera di variare: è utile nel caso un’implementazione sia in comune tra molti oggetti e possa venir riutilizzata ulteriormente.</p>
+        <p>Un’ulteriore vantaggio è la possibilità di nascondere i dettagli di implementazione dal client, addirittura modificandoli a run-time.</p>
+        <p>Si implementa creando appunto un’interfaccia <strong>Abstraction</strong> che sarà implementata da una certa classe concreta. Al momento dell’istanziazione della classe concreta andrà fornito come argomento il <strong>ConcreteImplementor</strong>, la classe che contiene l’implementazione dei vari metodi. Tale argomento viene passato attraverso una interfaccia <strong>Implementor</strong> generica, implementata da tutte le versioni dei ConcreteImplementor che saranno realizzati.</p>
+        <h2>Composite</h2>
+        <p>Questo pattern serve a creare strutture annidate di oggetti senza dover differenziare tra foglie e nodi intermedi della struttura ad albero: essi godono infatti della medesima interfaccia <strong>Component</strong>.</p>
+        <p>E’ possibile aggiungere figli nella struttura gerarchica con le operazioni add e remove presenti: si può scegliere se inserire tali operazioni nell’interfaccia Component (gestendole in maniera appropriata laddove sono impossibili, cioè nel caso delle foglie) oppure direttamente nelle implementazioni dei nodi non foglia (<strong>Composite</strong>).</p>
+        <p>Questo pattern ha come vantaggi la possibiità appunto di gestire indipendentemente nodi e foglie, aggiungendo livelli a piacimento all’interno della struttura ad albero.</p>
+        <h2>Decorator</h2>
+        <p>Pattern che permette di aggiungere responsabilità addizionali, cioè funzionalità a runtime ad un certo oggetto: è una <strong>flessibile alternativa all’ereditarietà</strong>.</p>
+        <p>Permette inoltre di semplificare il codice scrivendo classi più snelle, specifiche per una determinata funzionalità: è importante che anche le interfacce siano snelle, altrimenti diventa molto complicata da implementare per tutti i Decorators.</p>
+        <p>Un altro fattore su cui fare attenzione è il peggioramento delle prestazioni quando ho molti Decorators a catena.</p>
+        <p>Dal punto di vista implementativo il design pattern prevede una interfaccia o una classe astratta che verrà implementata/estesa dai vari Decorator previsti.</p>
+        <p>Tale interfaccia/classe astratta deve implementare un certo tipo di interfaccia, che rappresenta una “classe decorabile”, che deve essere implementata anche dagli oggetti semplici che voglio decorare.</p>
+        <p>Questi oggetti “decorabili” sono forniti come argomento al decorator, che li ingloberà, tenendo un riferimento al suo interno all’oggetto decorabile.</p>
+        <h2>Facade</h2>
+        <p>O facciata, preved che venga esposta in un’unica interfaccia un insieme di funzionalità/interfacce offerte da un sottosistema.</p>
+        <p>Definisce una interfaccia di alto livello che rende il sottosistema più semplice da usare, può essere utilizzata ad esempio per esporre all’esterno tramite un’unica interfaccia una intera libreria.</p>
+        <p>Un altra applicazione può essere quella di combinare vari metodi in un un solo metodo, ed esporre all’esterno la funzionalità, in modo che sia possibile eseguire un task complesso e ricorrente con una singola chiamata.</p>
+        <p>Dal punto di vista dell’implementazione si tratta di una classe che espone una certa interfaccia e richiama al suo interno molti oggetti della logica di business differenti, utilizzandoli per portare a termine i suoi compiti.</p>
+        <h2>Flyweight</h2>
+        <p>Pattern per evitare di istanziare un grande numero di oggetti, riutilizzando istanze preesistenti per rappresentare nuovi oggetti.</p>
+        <p>Si utilizza quando  c’è un grande numero di oggetti tale che questi potrebbero addirittura non entrare in memoria, oppure nel caso gli oggetti hanno uno stato calcolabile a runtime o memorizzato su disco. Il beneficio di questo pattern è appunto la riduzione del numero di oggetti creati, quindi della memoria utilizzata, e quindi un vantaggio dal punto di vista prestazionale.</p>
+        <p>Gli oggetti flyweight possono essere creati da una factory che si occupa di stabilire quando un nuovo oggetti va creato e quando invece va riutilizzato un oggetto già esistente (deve quindi contenere un indice, una struttura che memorizzi gli oggetti già istanziati).</p>
+        <p>Un esempio di applicazione è per rappresentare graficamente un carattere in un word processor: tutte le caratteristiche del carattere (font, dimensioni, altre caratteristiche di formattazione) sono salvate nell’oggetto, che in realtà si ripete più volte, e cambia solo la posizione dello stesso che viene memorizzata esternamente all’oggetto.</p>
+        <h2>Proxy</h2>
+        <p>E’ un design pattern strutturale che prevede l’inserimento di un oggetto intermedio tra il client e un oggetto che possiede determinate responsabilità.</p>
+        <p>Perchè inserire un oggetto intermedio (il <strong>Proxy</strong>)?</p>
+        <ul>
+            <li>Per motivi di sicurezza, il client non accederà mai all’oggetto che contiene la logica di business ma solo al proxy che si occupa del login. Nel caso il login sia superato, verrà poi effettuato l’accesso all’oggetto reale.</li>
+            <li>Per motivi di prestazioni: il proxy sarà meno pesante dell’oggetto che contiene la logica di business, se il login fallirà avrò risparmiato memoria dato che l’oggetto business non sarà mai istanziato</li>
+            <li>Per motivi architetturali: posso avere un proxy locale, mentre l’oggetto al quale desidero accedere può risiedere remotamente, in un altra macchina, e il proxy serve appunto a stabilire un canale di comunicazione con quest’ultimo</li>
+        </ul>
+        <p>I problemi di questo pattern sono appunto prestazionali: viene comunque inserito un ulteriore livello di astrazione, ed inoltre un altro problema è dato dal fatto che devo stare attento ad utilizzare l’oggetto dietro il proxy sempre in questa modalità, utilizzando a volte con il proxy e a volte senza potrei avere comportamenti inattesi.</p>
+        <p>Esempi di applicazione: login, cache (salvo una cache sul proxy, poi quando raggiungo una certa dimensione apro l’oggetto reale e deposito là la cache).</p>
+        <hr>
+    </section>
+    <section>
+        Nel prossimo articolo saranno trattati i design pattern comportamentali. <p></p>
+        <p>Se desideri maggiori informazioni sui design pattern creazionali, ti suggerisco di acquistare il <a href="http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21', 'libro della GoF');">libro della GoF</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=887192150X" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (al miglior prezzo).</p>
+    </section></div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

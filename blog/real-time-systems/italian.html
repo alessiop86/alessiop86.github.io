@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Introduzione ai sistemi Real Time</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>Introduzione ai sistemi Real Time</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/introduzione-ai-sistemi-real-time/">old blog</a>)</small></small>
+<div class="entry-content">
+    <p>L’articolo di quest’oggi non pubblicizza nessun libro, a differenza del solito dove l’articolo consiste in un riassunto di un libro con tanto di link per acquistare il libro su Amazon.</p>
+    <p>Il riassunto di oggi riguarda gli appunti del mio corso di Sistemi Operativi Real-Time dell’università: come detto solitamente i riassunti sono allo scopo di pubblicizzare la vendita di libri su Amazon, questa volta ho scritto l’articolo per ripassare e ricordare meglio l’argomento.<br>
+        <span id="more-250"></span><br>
+        Si parla del real-time o tempo reale nei sistemi informatici. Chiedo scusa in anticipo per il livello molto poco approfondito con il quale l’argomento sarà trattato, questa è solo una introduzione di livello molto generale sull’argomento, tanto per avere un’idea generale sulla cosa.</p>
+    <section>
+        <h1>Real time</h1>
+        <p>Nei sistemi real-time si introduce la variabile temporale nel sistema: se si parla di <strong>hard real-time</strong> si hanno dei job critici che devono essere eseguiti entro un certo istante, oppure sarà da considerarsi fallito. Al contrario nel  <strong>soft real-time</strong> non c’è garanzia che un job sarà eseguito entro un certo istante, ma solo che esso sarà eseguito il prima possibile.</p>
+        <p>E’ importantissimo sottolineare che nei sistemi real-time <strong>non c’è una maggior velocità di esecuzione dei task, c’è solo una maggior predicibilità</strong> (sappiamo come si comporterà il sistema in futuro, entro quando eseguirà un certo task).</p>
+        <p>Inoltre il tempo non è l’unico vincolo che è possibile aggiungere allo scheduling dei task, altri vincoli possono essere precedenze o risorse condivise. Sulle risorse condivise è presente un paragrafo in seguito.</p>
+        <h2>Metriche real-time</h2>
+        <p><img src="http://www.summarify.com/wp-content/uploads/2013/04/metrics_rt.jpg" alt="metrics_rt" width="556" height="224" class="aligncenter size-full wp-image-240" srcset="http://www.summarify.com/wp-content/uploads/2013/04/metrics_rt.jpg 556w, http://www.summarify.com/wp-content/uploads/2013/04/metrics_rt-300x120.jpg 300w" sizes="(max-width: 556px) 100vw, 556px"></p>
+        <h2>Scheduler</h2>
+        <p>E’ un software che si occupa di programmare l’ordine di esecuzione dei vari task di un sistema secondo un determinato algoritmo di scheduling. Gli algoritmi di scheduling possono essere</p>
+        <ul>
+            <li><strong>con prelazione</strong>: possono interrompere l’esecuzione di un task quando un nuovo task con priorità più alta arriva</li>
+            <li><strong>senza prelazione</strong>: non possono interrompere l’esecuzione di task quando un nuovo task con priorità più alta arriva</li>
+            <li><strong>offline</strong>: lo scheduling viene fatto prima dell’attivazione del primo task</li>
+            <li><strong>online</strong>: lo scheduling viene fatto ogni volta che task termina e occore sceglierne uno nuovo da mandare in esecuzione</li>
+            <li><strong>ottimale</strong>: minimizza una funzione di costo</li>
+            <li><strong>euristico</strong>: non garantisce il miglior scheduling, ma cerca di ottimizzare</li>
+        </ul>
+        <h2>Algoritmi di scheduling</h2>
+        <p>Esistono sia algoritmi non real-time quali ad esempio, <strong>FCFS </strong>(First Come First Served), <strong>SJF </strong>(Short Job First), <strong>Round Robin</strong> (FCFS dove ogni task non viene eseguito fino al suo termine, ma fino al termine del quanto di tempo dedicato).</p>
+        <p>Inoltre ci sono alcuni algoritmi di scheduling dedicati per il real-time, quali:</p>
+        <ul>
+            <li><strong>EDF </strong>(Earliest Deadline First): il task con la deadline più vicina viene eseguito per primo; potrebbe essere con prelazione o senza prelazione, ma in questo caso non è ottimale</li>
+            <li><strong>EDF*</strong>: EDF con vincoli di precedenza</li>
+            <li><strong>Rate Monotonic</strong>: scheduling per task periodici, con priorità fissa proprozionale al periodo dei task</li>
+        </ul>
+        <p>In caso di un insieme misto di task periodici o aperiodici, esistono alcuni artifici: il più semplice prevede che vengano schedulati i task periodici con un algoritmo di scheduling per task periodici, e ogni volta che non ci sono task periodici da essere eseguiti, viene eseguito un task aperiodico (in questo modo questi ultimi possono essere penalizzati e venir serviti in grande ritardo (o mai). Una variante più complessa prevede invece che venga introdotto un task periodico server nel quale vengano inseriti i task aperiodici.</p>
+        <h2>Risorse condivise</h2>
+        <p>Quando una risorsa è mutualmente esclusiva (può accedervi un solo task per volta), è importante avere un meccanismo per evitare <strong>l’inversione di priorità</strong> (un task a bassa priorità prende controllo di una risorsa all’interno della sua <strong>Sezione critica</strong> e non lo rilascia anche quando un task a più alta priorità, che arriva dopo, ne fa richiesta, scavalcando di fatto il task a priorità più alta.</p>
+        <p>Le soluzione per il problema dell’inversione di priorità sono molteplici:</p>
+        <ul>
+            <li><strong>NPP</strong> (non preemptive): un task all’interno della sua  sezione critica non può essere prelazionato, guadagnando di fatto la priorità massima</li>
+            <li><strong>HLP</strong> (highest locker priority): un task non guadagna la priorità massima assoluta, ma solo la priorità massima tra tutti quei task che condividono la risorsa</li>
+            <li><strong>PIP</strong> (priority inheritance protocol): il task attualmente in esecuzione eredità la più alta delle priorità tra tutti i task che richiedono la risorsa condivisa</li>
+            <li><strong>PCP</strong> (priority ceiling protocol): estensione del PIP, con una regola che vieta ad un task di entrare nella sua sezione critica se non ha una priorità sufficientemente alta</li>
+            <li><strong>SRP</strong> (stack resource policy): un task viene fermato non quando tenta di entrare nella sezione critica, ma prima, quando tenta di ottenere la prelazione sul task attualmente in esecuzione</li>
+        </ul>
+        <h2>Real time Linux</h2>
+        <p>Linux è un sistema con delle qualità che lo rendono appettibile per la gestione di task real-time, nonostante nella mainline del kernel sono state introdotte solo alcune funzionalità RT: principalmente è appetibile a causa della sua natura open-source e al suo kernel monolitico, adatto a embedded systems che spesso e volentieri si utilizzano in ambiti dove il tempo è importante.</p>
+        <p>Esistono difatti diverse soluzioni per il rea-time sotto Linux, alcune open-source ed altre commerciali per citarne un paio RTLinux e Xenomai.</p>
+        <p>Il funzionamento è complesso, ma in linea di massima si trattano di patch che gestiscono gli interrupt in modo particolare, permettendo al SO di gestire in modo diverso i task standard e quelli che necessitano del real-time scheduler.</p>
+    </section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

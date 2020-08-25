@@ -1,0 +1,208 @@
+<html>
+<head>
+    <title>[Italian] Skill essenziali per lo sviluppatore Agile</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] Skill essenziali per lo sviluppatore Agile</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/skill-essenziali-per-lo-sviluppator-agile/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Essential skills for the agile developer" src="http://www.summarify.com/wp-content/uploads/2013/03/essential_skills.png" width="320" height="267"></div>
+        <p>Essential Skills for the Agile Developer è un libro scritto a quattro mani (Alan Shalloway, Scott Bain, Ken Pugh e Amir Kolsky) che si pone come obiettivo quello di aiutare il lettore a migliorare la qualità e il design del codice da lui prodotto.</p>
+        <p>Già da questa introduzione si capisce come sia un libro rivolto a programmatori più o meno esperti, che desiderano migliorare le proprie capacità soprattutto per quanto riguarda la programmazione ad oggetti, ed hanno già le conoscenze e competenze necessarie per comprendere gli esempi forniti all’interno del libro ed eseguire gli esercizi proposti al termine di ogni capitolo.<br>
+            <span id="more-58"></span><br>
+            In questo articolo troverai alcuni dei passaggi che ho ritenuto più interessanti del libro. Se desideri saperne di più, puoi acquistare il libro su Amazon in tre versioni:</p>
+        <ul>
+            <li><a href="http://www.amazon.it/gp/product/0321543734/ref=as_li_tf_tl?ie=UTF8&amp;camp=3370&amp;creative=23322&amp;creativeASIN=0321543734&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0321543734/ref=as_li_tf_tl?ie=UTF8&amp;camp=3370&amp;creative=23322&amp;creativeASIN=0321543734&amp;linkCode=as2&amp;tag=summarify-21', 'Essential Skills for the Agile Developer – in inglese versione cartacea');">Essential Skills for the Agile Developer – in inglese versione cartacea</a><img style="border: none !important; margin: 0px !important; display: none !important;" alt="" src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0321543734" width="1" height="1" border="0"></li>
+            <li><a href="http://www.amazon.it/gp/product/B005HXMZ0S/ref=as_li_tf_tl?ie=UTF8&amp;camp=3370&amp;creative=23322&amp;creativeASIN=B005HXMZ0S&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B005HXMZ0S/ref=as_li_tf_tl?ie=UTF8&amp;camp=3370&amp;creative=23322&amp;creativeASIN=B005HXMZ0S&amp;linkCode=as2&amp;tag=summarify-21', 'Essential Skills for the Agile Developer – in inglese versione kindle');">Essential Skills for the Agile Developer – in inglese versione kindle</a><img style="border: none !important; margin: 0px !important; display: none !important;" alt="" src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B005HXMZ0S" width="1" height="1" border="0"></li>
+        </ul>
+    </section>
+    <section>
+        <h1>I consigli che ho trovato più interessanti</h1>
+        <h2>Guida alla rimozione del codice duplicato</h2>
+        <p>Viene fornito un esempio, cioè la ricerca elemento per elemento di oggetti all’interno di un vettore, il cui codice è duplicato in quanto si trova sia nel metodo di visualizzazione che in quello di eliminazione.</p>
+        <p>E’ un classico esempio di errore di duplicazione: se dovessi aggiornare qualcosa inerente il vettore lo dovrei fare piu volte (es. se cambio implementazione dell’elenco da un vettore ad un array o ad un’altra struttura dati).</p>
+        <p>Inoltre in generale meno duplicazione implica meno codice e quindi meno codice da debuggare e meno possibilità di errori, oltre ad essere piu leggibile.</p>
+        <p><strong>E se avessi subroutine simili ma non uguali?</strong> Devo individuare cosa è uguale e cosa no, cercare di isolare le variazioni (es. parametrizzandole o mettendole in subroutine a parte) e poi rimuovere la ridondanza della parte in comune</p>
+        <p>Erano poi presenti altri esempi ad esercizi (con soluzioni), anche per casi più complessi, ad esempio la creazione di un’interfaccia comune, che venisse adottata dal codice in comune tra i metodi originali, e poi implementata da classi diverse che racchiudono le differenze delle subroutine da semplificare (cioè quelle dalle quali estrarre il codice duplicato).</p>
+        <h2>Trasformare commenti in codice</h2>
+        <p>Se uso nomi più espressivi per classi, metodi ed attributi posso risparmiarmi i commenti ed includerli dentro i nomi delle variabili.</p>
+        <p>In alternativa posso estrarre del codice e metterlo in un metodo a parte, appositamente per dargli un nome consono, in modo che il commento diventi superfluo!</p>
+        <p>Inoltre i commenti del tipo //costruttore sono inutili.</p>
+        <p>Al giorno d’oggi i programmatori abusano della possibilità di commentare il codice, a discapito della chiarezza del codice. <strong>Scrivere codice chiaro è più importante perchè magari in futuro questo verrà aggiornato ma non i commenti, creando grattacapi ad altre persone che dovessero mettere mani al codice.</strong> Se non ci sono commenti ma esiste solo il codice, il problema non si pone.</p>
+        <p>Quindi non bisogna mai commentare nulla? Assolutamente no, ci sono dei casi nei quali i commenti sono obbligatori:</p>
+        <ul>
+            <li>per motivi di prestazione vengono eseguite operazioni in un ordine non logico e poco comprensibile, spiegherò le motivazioni</li>
+            <li>vengono utilizzati pattern poco conosciuti o poco usati, che lo sviluppatore originale stesso del codice potrebbe anche dimenticare</li>
+            <li>esprimere pre e post condizioni</li>
+        </ul>
+        <h2>Make it work, make it right, make it fast</h2>
+        <p>Il codice per prima cosa deve funzionare, poi se va funziona si provvederà a sistemare i casi non base, le eccezioni, ecc., e solo alla fine si procede all’ottimizzazione.</p>
+        <p>In particolare l’ultima parte delle frasi precedenti richiama la famosa citazione di Donald Knuth (Professore americano, autore del più famoso libri sugli algoritmi):</p>
+        <blockquote><p>PREMATURE OPTIMIZATION IS THE ROOT OF ALL EVIL</p></blockquote>
+        <h2>Consigli per il refactoring</h2>
+        <ol>
+            <li>Aggiungere static e final per le variabili quando è appropriato e non è stato inserito durante la prima scrittura del codice</li>
+            <li>Quando è presente del codice inutilizzato, vuol dire che occorre rifattorizzare qualche cosa</li>
+            <li>Quando ho delle variabili con un nome generico perchè potrebbero assumere significati diversi a seconda delle situazioni, probabilmente c’è un errore di design a monte.</li>
+            <li>Quando ho delle variabili che definiscono il <strong>tipo di un oggetto</strong>, si rifattorizza creando delle sottoclassi.</li>
+            <li><strong>If-then-else complessi o annidati</strong> possono essere eliminati utilizzando le sottoclassi, lasciando alle diverse implementazioni delle classi il compito che prima era dell’if di discriminare le operazioni</li>
+            <li>Metodi troppo lunghi devono essere scomposti</li>
+            <li>Metodi che fanno cose diverse ma hanno nomi uguali, vanno modificati</li>
+        </ol>
+        <h2>Mantenere il codice snello</h2>
+        <p>E’ importantissimo il principio della singola responsabilità: quando una classe include molti tipi di funzionalità differenti, siamo di sicuro violando il principio della responsabilità singola.</p>
+        <h2>Design by contract</h2>
+        <p>Insieme di best-practices nella design object oriented che aggiunge dei vincoli in modo da facilitare nella creazione di un design corretto</p>
+        <ul>
+            <li>Le classi devono specificare cosa è vero prima e cosa è vero dopo l’esecuzione dei metodi pubblici (ovvero le precondizioni e postcondizioni)</li>
+            <li>Se un metodo ha delle precondizioni e queste non vengono rispettate, è colpa del client, non deve presentare al suo interno le eccezioni, dovrà pensare a tutto il client, il quale deve assicurarsi che siano rispettate</li>
+            <li>Principio di sostituzione di Liskov: posso sostituire un tipo con un suo sottotipo senza causare malfunzionamenti nel programma. Nel design-by-contract ho ben esplicitato cosa mi aspetto che non cambi dai singoli metodi.</li>
+        </ul>
+        <h2>Scegliere le ereditarietà con cura</h2>
+        <p>Potrei fare una ereditarietà sbagliata: es. metodo che poi non mi serve, in quel caso devo toglierla, posso utilizzare la <strong>delegation</strong> o <strong>delega</strong>.</p>
+        <p>La delega è un modo per estendere e riusare le funzionalità di una classe senza ricorrere all’ereditarietà: simulo l’ereditarietà utilizzando un’istanza della classe originale per fornire le funzionalitù originali, inoltre ne aggiunge di nuove. Serve per rappresentare concetti comeIS-A-ROLE-PLAYED-BY e non il IS-A-KIND-OF per cui si usa l’ereditarietà.</p>
+        <p>DELEGATOR ——–USES—–&gt; DELEGATEE</p>
+        <p>Ha il vantaggio di poter essere modificate a runtime, ed il modo più semplice per creare una delegation è utilizzare una classe attributo di un’altra classe.</p>
+        <h2>Handling inappropriate references</h2>
+        <p>Se la classe A ha un riferimento a B, allora quando riuseremo A, questa tirerà in ballo B. Se a sua volta B ha un riferimento a C, eccetera. Ma se C non ha significato nel nuovo ambiente, non potremo utilizzare A. Quindi bisogna stare attenti ai riferimenti o le classi diventano difficilmente riutilizzabili.</p>
+        <p>Primo passo: evitare riferimenti a classi troppo specifiche o di sistema (non riutilizzabili altrove)</p>
+        <p>Secondo passo: evitare riferimenti circolari o mutui.</p>
+        <p>Viene poi introdotto il “<strong>Dependency Inversion Principle</strong>“: un modulo di alto livello non dovrebbe dipendere su un modulo di basso livello: se questo succede, bisogna estrarli entrambi in un concetto astratto e lasciarli dipendere da quel concetto.</p>
+        <p>ES. Se un programma copia un carattere dalla tastiera alla stampante, modificandolo per supportare device qualsiasi (non solo stampanti) non è elegante: il metodo copy dipende dalla tastiera. Un’implementazione migliore prevede un’interfaccia per i lettori ed una per gli scrittori, in modo che il programma sia adattabile facilmente alla scrittura e lettura da altri device.</p>
+        <h2>Separate Database, User Interface and Domain Logic&lt;</h2>
+        <p>Separare: il database su una classe a parte, così come UI e logica di business: devo dividere il codice in 3 layer.</p>
+        <p>Il layer del dominio logico ha riferimenti da entrambi gli altri , ma non viceversa: questo rende facile riutilizzarlo.</p>
+        <p>Il database layer ha un riferimento al domain logic layer, ma non all’UI layer. Non importa se il sistema è text based, GUI based o web based, questo layer non può essere riutilizzato.</p>
+        <h2>Gestire un progetto software ricorrendo a user stories o casi d’uso (scenari)</h2>
+        <p>Una userstory è una descrizione, una narrativa da parte dell’utente dalla sua prospettiva. Partendo dalla descrizione testuale non strutturata del problema, ricaverò un’elenco di punti, il cosiddetto flusso.</p>
+        <p>Il caso d’uso descrive però solo il comportamento esterno del sistema, tralasciando quello interno: non devo specificare che succede dentro ne parlare di database, records, o campi, sto parlando dell’interazione utente-sistema.</p>
+        <p>La suddivisione nel flusso principale e flussi secondari mi permette di strutturare meglio il problema, ad esempio stimando il tempo necessario per realizzare ciascun punto. Posso così dare dei punteggi di difficoltà ai singoli punti (il libro parla di <strong>story points</strong>. Alla fine moltiplico la somma degli story point per il tempo che stimo ci voglia a fare un punto che richiede 1 solo story point, ed ho una stima del tempo necessario per il completamento del progetto.</p>
+        <p>Questa è una prima stima, in realtà posso fare una stima piu precisa misurando quanto tempo effettivo ci metto a fare 1 story point e poi moltiplicando per il numero totale degli story points.</p>
+        <p>Nella realizzazione effettiva, che succede?</p>
+        <p>Posso decidere di rimandare degli scenari ad una iterazione successiva, se non sono fondamentali subito, per completare le parti chiave al piu presto, oppure posso aumentare i developers (il miglioramento non è detto che sia lineare, anzi è quasi sicuro che non lo sia, se raddoppio il team ci metterò 2/3 del tempo, non la metà, ad esempio, a causa di costi di coordinamento e comunicazione,ecc.).</p>
+        <p>Se non riesco a stimare il tempo necessario per una certa user story, posso agire in tre direzioni:</p>
+        <ul>
+            <li>suddividerla in più user story</li>
+            <li>chiedere a chi ha l’esperienza e la conoscenza necessaria per stimare il tempo di aiutarmi</li>
+            <li>eseguire degli esperimenti</li>
+        </ul>
+        <h3>Iterazioni</h3>
+        <p>Un progetto agile è implementato in iterazioni. All’inizio di ogni iterazione, lasceremo l’utente scegliere le user story che vuole implementate nell’iterazione, che di solito saranno quelle più importanti.</p>
+        <p>Se un’user story viene eseguita prima di un’altra da cui dipende, si ricorrerà ai cosiddetti stub o parti hard coded, cioè a simulazioni ultra-semplificate della user story mancante.</p>
+        <p>Se un’attività richiede piu del tempo disponibile in un’iterazione (es. 2.5 punti settimanali), posso sempre spezzare l’attività in 2-3 parti e farne solo alcune in questa iterazione.</p>
+        <p>Invece di buttare giù tutte le specifiche subito, farò vedere all’utente l’user story e gli farò ripecorrere il processo, così da essere sicuro di individuare subito eventuali problemi. Inoltre eventuali dubbi potranno essere chiariti direttamente, con evidenti vantaggi rispetto allo stilare un semplice foglio pieno di requisiti.</p>
+        <h2>Design delle classi utilizzando le schede CRC</h2>
+        <p>Una scheda CRC (dove la sigla rappresenta Classi, Responsabilità e Collaborazioni) è un foglio di carta nel quale sono appuntati dei concetti del mondo reale che stiamo per modellare in classi, con alcune responsabilità legate a tali oggetti e delle collaborazioni con altre classi necessarie per adempiere alle proprie responsabilità.</p>
+        <p>Partendo dal flusso delle attività (o degli eventi), indico per ciascuna classe quali sono le responsabilità (cioè le cose che deve fare) e le collaborazioni (cioè le altre classi assieme alle quali portare a termine le proprie responsabilità).</p>
+        <p>Se escono fuori troppe responsabilità (&gt;4) è possibile riunirne alcune in una più astratta oppure creare un’altra classe.</p>
+        <p>Le schede CRC servono per esplorare alternative di design, se una alternativa non mi convince posso buttare tutto. Servono per <strong>creare un design velocemente</strong>, non servono nè come documentazione finale nè devono essere perfette, le aggiusterò dopo al momento dell’implementazione.</p>
+        <h3>Acceptance test</h3>
+        <p>Mentre richiedo maggiori dettagli sulla user story allo stakeholder, mostrandogli le CRC cards, è possibile avere una conferma che ci si sta muovendo nella direzione giusta.</p>
+        <p>L’acceptance test invece dell’implementazione (o test funzionale) prevede che sia controllato solo se il funzionamento esterno del sistema va a buon fine, ignorando quello che succede all’interno. Ad esempio arrivano le mail di conferma finali? Viene visualizzato a video quello che mi aspetto?</p>
+        <p>Questi controlli vanno fatti in più casi:</p>
+        <ul>
+            <li>nel caso vada tutto bene</li>
+            <li>nel caso qualcosa vada male</li>
+            <li>nel caso si verifichi una eccezione (es. ID DUPLICATO) gestita</li>
+        </ul>
+        <p>E` quindi necessario creare dei <strong>test cases</strong>, e poi eseguirli manualmente. Questo però richiede molto tempo e sforzi. Inoltre ad ogni modifica del codice i test andrebbero rieseguiti: diventa necessario automatizzare il tutto.</p>
+        <p>I test vengono automatizzati scrivendo del codice che provveda all’esecuzione dei test cases dell’acceptance test autonomamente, una classe con un metodo per ogni test case.</p>
+        <p>Tutti i metodi che eseguono test cases <strong>non devono includere domain logic</strong> (ordinamento, controlli, eccetera), eventuali metodi che includano elementi della domain logic vanno spostato negli oggetti della domain logic, fuori dai test, e quindi verranno richiamati dal metodo della classe test.</p>
+        <p>E’ importante scrivere bene i test cases: modifiche e problemi successivi possono essere evitati tenendo bene in considerazione quello che può e quello che non può succedere ed agire di conseguenza. E` possibile anche farsi aiutare dagli stakeholder in questa attività, per individuare casi critici o limite (es. email max 25 caratteri).</p>
+        <p>Una volta scritti test cases accurati, sarà possibile eseguirli a piacimento, modificandoli leggermente se cambia qualcosa nell’interfaccia della domain logic, ma comunque in modo veloce.</p>
+        <p>Per farmi aiutare dagli utenti/stakeholder a scrivere l’acceptance test posso usare uno strumento come FIT. L’utente scrive i vincoli, poi lancerò l’esecuzione con Ant e poca programmazione. http://fit.c2.com/</p>
+        <h2>Acceptance test a user interface:</h2>
+        <p>Partendo dalla descrizione della user story, concordo assieme al customer/stakeholder uno storyboard, dei prototipi di interfaccia da seguire. Come si testano le interfacce grafiche?</p>
+        <ol>
+            <li>Individuare gli elementi della UI da testare</li>
+            <li>Tesare gli elementi separatamente: preparare un test case e programmare un metodo specifico che simuli l’azione di input dell’utente sulla UI</li>
+            <li>Talvolta si potrebbe pensare che non sia la strada più semplice testare tutta o almeno più elementi assieme (es. dropdown list, o schermata dei dettagli): tuttavia è possibile testare separatamente i due dialog e prendere un input statico (es. invece di utilizzare nel test una prima dialog che determina l’input per la seconda, si utilizza un input statico per la seconda dialog, ad esempio una stringa, e successivamente viene testata a parte la primadialog</li>
+        </ol>
+        <p>In pratica è consigliato scrivere del codice per ogni use case, in modo da automatizzare il test. Test manuali (molto costosi), oppure replay based GUI (questi ultimi potrebbero non funzionare ed ogni volta che cambio la GUI diventano inutili, rendendo impossibile il regression testing*) sono sconsigliati..</p>
+        <p>*<strong>regression testing</strong><br>
+            Consiste nell’eseguo un’intera serie di test sul codice in occasione di ogni nuova modifica, alla ricerca di errori introdotti con la modifica stessa. Cioè cerco errori causati dall’introduzione delle novità.<br>
+            L’aspetto più difficile è generare un insieme di test cases che copra tutti i problemi possibili, cercando di non impiegare troppo tempo, includendo una serie di test automatici e casi di prova. Per evitare tempo del testing e ridurre la complessità della libreria di test di regressione, è possibile eliminare dalla libreria di test di regressione tutti quei test cases che non possono essere stati intaccati dalla modifica che si intende testare.</p>
+        <h2>Unit test</h2>
+        <p>Test case per il comportamento di una singola classe, o meglio di una unità. E’ diverso dall’acceptance test perchè non testa il comportamento esterno del sistema, dal punto di vista del client, ma il comportamento interno della classe.</p>
+        <p>In java si utilizza <strong>JUnit</strong>, includendo le librerie corrispondenti ed utilizzando metodi come assertEquals(X,Y) si controlla se X ed Y sono uguali, e viene lancia un’eccezione in caso contrario.</p>
+        <p>Inoltre JUnit fornisce una GUI, nella classe TestRunner, che mostra i risultati del test e l’avanzamento degli stessi, eventualmente con lo stacktrace dell’eccezione.</p>
+        <p>Il <strong>TestUnit va svolto per ogni metodo ed ogni classe</strong>, a meno che il metodo sia troppo semplice per causare errori (es. costruttori), resterà solo il metodo equals per esempio, scrivo il test e lo lancio.</p>
+        <p>JUnit permette di lanciare intere <strong>Suite di test</strong>, cioè impostare tutti i test in un metodo unico e poi eseguirli in un colpo solo. Per creare nuovi test sarà necessario andare ad aggiungerli alla suite esistente, e questi verranno accodati a tutti i test preesistenti.</p>
+        <p>I test sono programmi scritti per essere eseguiti in modalità batch (non interattiva) e testare i metodi di una classe, osservando se la risposta attesa è ottenuta. Sono una componente fondamentale della software engineering, sono gli sviluppatori stessi che scrivono test per ogni classe prodotta. Un test deve essere completo, predicendo ogni aspetto che potrebbe non funzionare.</p>
+        <p><strong>Quando eseguire l’Unit Test?</strong> Appena si è finito di scrivere o modificare la classe oggetto dell’unit test, o una classe ad essa collegato. Inoltre se si deve eseguire un acceptance test, questo è buona norma sia svolto dopo gli unit test, per evitare bug.</p>
+        <h3>Code Unit Test First</h3>
+        <p>L’interfaccia e l’output di un oggetto sono più importanti della loro implementazione, prima scrivo le prime. Cioè:</p>
+        <ol>
+            <ol>
+                <li>stabilisco ciò che bisogna fare</li>
+                <li>scrivo un unit test per la nuova funzionalità che deve svolgere la mia classe; tale funzionalità deve rappresentare il più piccolo incremento possibile (piccoli step)</li>
+                <li>eseguo l’unit test, se funziona vado alla prossima funzionalità</li>
+            </ol>
+        </ol>
+        <p>La cosa fondamentale è questa: non implementare 2 cose contemporaneamente, e quindi non provare a fixare 2 cose contemporaneamente, ma solo una. Adottando questo approccio, lo sviluppo è un ciclo di testing-&gt;ricerca del bug-&gt;fix-&gt;test-&gt;feedback positivo, e quindi si può procedere con la feature successiva.</p>
+        <h3>Test Driven Development</h3>
+        <p>E` un’estremizzazione dell’approccio precedente.</p>
+        <ol>
+            <ol>
+                <ol>
+                    <li>Scrivo prima gli Unit Test, riferiti a classi che non esistono ancora. Non userò DATABASE nei miei test (non mettere nei test dati non necessari, database connections e tutto quello che non serve o complica ulteriormente il tutto), userò classi di storage, che poi al loro interno implementerò come mi pare. Si fa ricorso ad interfacce per rendere più semplice la scrittura dei test: partendo dai test elimino dei dettagli implementatiivi dai test che in realtà sarebbero ininfluenti. Scrivendo prima i test, è più facile scrivere un comportamento per volta, il che rende più facile il tutto, e viceversa non testare la stessa cosa 2 volte in 2 test diversi: es. quando testo la validazione non testerò anche la scrittura su storage, che la testerò da un’altra parte…il segreto è dividere lo sviluppo (e quindi il testing) in parti piccole, per realizzare cicli di sviluppo da pochi minuti.</li>
+                    <li>Scrivo lo scheletro delle mie classi, solo il codice necessario per far compilare unit test: classi e metodi vuoti.</li>
+                    <li>Lancio il test e lo vedo fallire (su JUnit ho la caratteristica barra rossa)</li>
+                    <li>Scrivo il codice necessario (l’implementazione della classe) per far passare il test</li>
+                    <li>Lancio il test e questo viene superato</li>
+                    <li>Rifattorizzazione ed ottimizzazione: rimozione eventuale doppioni di codice, codice inutile, riscrivere il codice per aumentare l’espressività delle variabili ecc, rifattorizzando in modo da aumentare coesione e ridurre accoppiamento: è possibile aggiungere i design pattern, ma uno alla volta, non tutti assieme</li>
+                    <li>Ripetere gli step precedenti per altre funzionalità</li>
+                </ol>
+            </ol>
+        </ol>
+        <h2>La comunicazione durante lo sviluppo di un software</h2>
+        <p>Esistono diversi modelli di comunicazione per i requisiti:</p>
+        <ol>
+            <ol>
+                <ul>
+                    <li>L’analista scrive al cliente per capire i requisiti, e scrive delle specifiche SRS (<strong>Software Requirements Specifications</strong>). A questo punto queste SRS andranno comprese dagli sviluppatori, che se non capiscono chiederanno chiarimenti all’analista che potrebbe chiedere di nuovo al cliente</li>
+                    <li>Gli sviluppatori parlano direttamente col cliente, i requisiti sono poi scritti come acceptance test. Se ci sono dubbi c’è comunicazione diretta sviluppatore-&gt;cliente</li>
+                    <li>L’analista parla al cliente e si fa dare i requisiti principali, poi scrive una breve descrizione di ogni feature e la manda agli sviluppatori. Per i dettagli gli sviluppatori si interfacceranno direttamente col cliente, ad esempio con meeting settimanali.</li>
+                </ul>
+            </ol>
+        </ol>
+        <p>Esistono anche diversi modelli per la comunicazione del design tra sviluppatori:</p>
+        <ol>
+            <ol>
+                <ul>
+                    <li>diagrammi UML</li>
+                    <li>codice facile da comprendere, il design è intuito dal codice</li>
+                    <li>Developers parlano del design mentre disegnano su una lavagna</li>
+                    <li>Developers usano CRC cards, simile al discorso della lavagna ma posso spostare gli elementi del design più agevolmente</li>
+                </ul>
+            </ol>
+        </ol>
+        <p>Quale di questi modelli sia il migliore dipende dai casi, il primo metodo è il più pesante, include un sacco di dettagli, il secondo è il più leggero ma è difficile da capire per gli altri sviluppatori.</p>
+    </section>
+    <section>Questi sono solo alcuni tra i principali argomenti trattati in <strong>Essential Skills for the Agile Developer</strong>. Per una trattazione più completa e per scoprire quali concetti, esempi ed esercizi sono presenti nel libro ed assenti nel mio riassunto, ti invito a comprare il libro su Amazon, al miglior prezzo.<br>
+    </section>
+    <p><iframe style="width: 120px; height: 240px; float: left; margin-top: 20px; display: none !important;" src="http://rcm-it.amazon.it/e/cm?t=summarify-21&amp;o=29&amp;p=8&amp;l=as1&amp;asins=0321543734&amp;ref=tf_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr" height="240" width="320" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><iframe style="width: 120px; height: 240px; float: left; margin-left: 20px; margin-top: 20px; display: none !important;" src="http://rcm-it.amazon.it/e/cm?t=summarify-21&amp;o=29&amp;p=8&amp;l=as1&amp;asins=B005HXMZ0S&amp;ref=tf_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr" height="240" width="320" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

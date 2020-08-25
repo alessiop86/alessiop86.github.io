@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Real-Time System introduction</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>Real-Time System introduction</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/en/real-time-systems/">old blog</a>)</small></small>
+<div class="entry-content">
+    <p>Today I am not going to advertise any book from Amazon like I usually do, with a summary of some book and the affiliate link.</p>
+    <p>Today I am going to post the summary of my notes about the Real-Time Operating Systems Course I attended at the my university: despite the main reason I am writing summaries is to get some bucks with the Amazon affiliate program, I enjoy posting summary because while re-writing (they are usually originally written into paper) and re-reading them, I refresh my memory about the topic.<br>
+        <span id="more-238"></span><br>
+        The topic of today is real-time in computer systems. I beg your perdon in advance because I will be very general about the topic, not getting into much detail about it: this is just supposed to be an introduction to the real-time topic.</p>
+    <section>
+        <h1>Real time</h1>
+        <p>When talking about real-time we introduce the time variable into system. If we are talking about <strong>hard real-time</strong> we have critical jobs that are supposed to be executed within a certain moment, or the job will be considered failed. On the contrary, the <strong>soft real-time</strong> does not guarantee that a job will be executed within a certain moment, but only that it will be executed as soon as possible.</p>
+        <p>It is important to point out that<strong> Real Time systems are not “faster” than traditional systems, they are just more predictable</strong> (we can just affirm something about the moment some task is going to be completed).</p>
+        <p>However, time is not the only constraint, we also can have precedence contraints or contraints related to shared resources. Shared resources will have a dedicated paragraph later.</p>
+        <h2>Real-time metrics</h2>
+        <p><img src="http://www.summarify.com/wp-content/uploads/2013/04/metrics_rt.jpg" alt="metrics_rt" width="556" height="224" class="aligncenter size-full wp-image-240" srcset="http://www.summarify.com/wp-content/uploads/2013/04/metrics_rt.jpg 556w, http://www.summarify.com/wp-content/uploads/2013/04/metrics_rt-300x120.jpg 300w" sizes="(max-width: 556px) 100vw, 556px"></p>
+        <h2>Scheduler</h2>
+        <p>It is a software that arranges the order of execution of the tasks, according to an scheduling algorithm. Those algoritm could be:</p>
+        <ul>
+            <li><strong>preemptive</strong>: it can interrupt the execution of a task when a new task with higher priority arrives</li>
+            <li><strong>non preemptive</strong>: it can not interrupt the execution of a task when a new higher priority task arrives</li>
+            <li><strong>offline</strong>: the scheduling is done before the activation of the first task</li>
+            <li><strong>online</strong>: the scheduling is done whenever a task ends or a new task arrives</li>
+            <li><strong>optimal</strong>: it minimizes a cost function, finding the best scheduling according to a certain algorithm</li>
+            <li><strong>euristic</strong>: it does not guarantee the best scheduling, it just tries to optimize the scheduling</li>
+        </ul>
+        <h2>Scheduling algorithms</h2>
+        <p>Non real-time algorithms’ family includes, amongst the others, <strong>FCFS </strong>(First Come First Served), <strong>SJF </strong>(Short Job First), <strong>Round Robin</strong> (FCFS where every task does not run until it is completed, it runs only for a quantum of time).</p>
+        <p>Besides non real-time algorithms there are some <em>dedicated real-time algorithms</em>, for example (there are a lot of them):</p>
+        <ul>
+            <li><strong>EDF </strong>(Earliest Deadline First): the task with the closest deadline is executed first. It could be both preemptive or not preemptive, but in this case it is not optimal. </li>
+            <li><strong>EDF*</strong>: EDF with precedence constraints</li>
+            <li><strong>Rate Monotonic</strong>: scheduling for periodic tasks, each task has a fixed priority proportional to its frequency.</li>
+        </ul>
+        <p>In case of a mixed set of periodic and aperiodic tasks, some kind of artifice is used in order to schedule them together: in the simplest version, all the aperiodic tasks are served when there are no periodic tasks waiting to be executed. In this case, the execution of the aperiodic tasks could be delayed a lot.</p>
+        <p>To solve this issue, there is a version of the mixed task real-time algorithm where we have an dummy periodic task, inside whom the aperiodic task are inserted.</p>
+        <h2>Shared resources</h2>
+        <p>When the resources are mutually exclusive, it is important to have some kind of mechanism to avoid the <strong>Priority Inversion</strong> issue (when  a lower priority task gets the control of a resource inside its <strong>Critical section</strong> and does not release it to an higher priority task that arrives later, gaining without rights an higher priority towards the second task.</p>
+        <p>There are several solutions at this:</p>
+        <ul>
+            <li><strong>NPP</strong> (non preemptive): a task inside its critical section can not be preempted: it gains the highest priority</li>
+            <li><strong>HLP</strong> (highest locker priority): the task does not gain the highest priority in assolute, but the highest priority amongst all the tasks that require the shared resource</li>
+            <li><strong>PIP</strong> (priority inheritance protocol): the task currently in execution inherit the highest priority of all the tasks that require the used resource</li>
+            <li><strong>PCP</strong> (priority ceiling protocol): extension of the PIP, with a rule that deny to a task to enter in its critical section if it has not a priority high enough</li>
+            <li><strong>SRP</strong> (stack resource policy): a task is not halted when it attempts to enter the critical section (like in PIP), but before, right at the moment when it attempts to preempt the task in execution</li>
+        </ul>
+        <h2>Real time Linux</h2>
+        <p>Linux is a system well suited to handle real-time tasks: despite on the mainline just few real-time functionalities are introduced, thanks to its open-source nature and its monolithic kernel (suited for embedded systems) Linux is a good candidate to be transformed into a Real-Time Operating System. In this direction, there are different real-time solutions, both open source and commercial, for example RTLinux, Xenomai.</p>
+        <p>Most of these solutions consist in real time patches that handle interrupts, separating and handling in different ways standard tasks and real-time tasks.</p>
+    </section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

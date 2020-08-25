@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Composite and Strategy from Design Patterns: Elements of Reusable Object-Oriented</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>Composite and Strategy from Design Patterns: Elements of Reusable Object-Oriented</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/en/composite-and-strategy-from-design-patterns-elements-of-reusable-object-oriented-software-215/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Design Patterns: Elements of Reusable Object-Oriented Software" src="http://www.summarify.com/wp-content/uploads/2013/03/design_patterns_gof.png" width="300" height="267"></div>
+        <p><strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> is the first and probably the most famous book about the <strong>Design pattern</strong>. It was first published in 1995, but thankfully those design patterns are still valid nowadays, the only outdated thing in this book may be the <strong>Smalltalk</strong> programming language, used in some examples. Anyway this book is still very good and popular: in fact I have decided to read this book when, in a job listing, it was expressly requested the knowledge of design patterns and of this book!</p>
+        <p>I will write a series of 15 articles about this book, making the summary of a couple chapters of this book in each one (the book is pretty big, it has over 500 pages). To deepen your knowledge of the argument, you can always buy the <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'book @ Amazon');">book @ Amazon</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.<br>
+            <span id="more-194"></span><br>
+        </p></section>
+    <section>
+        <h1>The composite pattern</h1>
+        <p>Like the name hints, this is a pattern designed to <strong>compose</strong> simple or already composed objects (without distinction between those two categories, by the adoption of a common interface) inside a tree structure.</p>
+        <p>There will not be differences between branches and leave regarding usage, the client will treat them uniformly: this is a really important fact, because it means <strong>the client will be simpler</strong> compared to a design with many have different objects with different interfaces and methods.</p>
+        <p>It is very useful in situations when we do not know in advance the level of complexity of the structure (through recursive composition we do not have to worry about the number of levels of composition).</p>
+        <p>The image from the GoF book was really complex, I think that the image you will find below, taken from a PDF called <strong>GoF Design Patterns – with examples using Java and UML2</strong> released under a Creatuve cinnibs Attribution-ShareAlike 3.0 license, it’s more clear and easy to understand. <img src="http://www.summarify.com/wp-content/uploads/2013/03/composite_design_pattern.png" alt="composite_design_pattern" width="697" height="355" class="alignright size-full wp-image-198" srcset="http://www.summarify.com/wp-content/uploads/2013/03/composite_design_pattern.png 697w, http://www.summarify.com/wp-content/uploads/2013/03/composite_design_pattern-300x152.png 300w, http://www.summarify.com/wp-content/uploads/2013/03/composite_design_pattern-624x317.png 624w" sizes="(max-width: 697px) 100vw, 697px"></p>
+        <p>In the book there are several reccomandations about the implementation of the Composite Pattern:
+        </p><ul>
+        <li>Make the <em>Component</em> interface as general and wide as possible. There are some border-line situations, like the methods to handle children: should they be declared in the <em>Component </em>interface, giving them some meaning also for the leaf, or should they be implemented directly into the <em>Composite </em>class? This is a trade-off, the first option favors transparency over safety</li>
+        <li>Always mantain a parent reference: that is gonna make possible to traversate and manage the structure. Usually such reference is defined in the Component abstract class or interface. On the other hand, it is not always advisable to keep the opposite reference: store a list of any children for each node could be a tempting idea, but this list will be a waste of memory for all the leaf, since they will not have any children. If you have a very big structure, this waste of memory can be considerable and you have to think about if whether is it convenient to add such list or not. </li>
+        <li>Make a composite object responsible for deleting all its children when it is destroyed. This is particulary important in C++, in Java with Garbage Collection it is somewhat less important.
+            <p>The Gang of Four books also presents a full example of the application of the Composite Pattern, that I will not copy for copyrights, but you can find a lot of Composite Design Pattern examples in Google. If you want to see the GoF examples you can always <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'buy the book');">buy the book</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.
+            </p></li></ul>
+    </section>
+    <section>
+        <h1>The strategy pattern</h1>
+        <p>coming soon<br>
+        </p></section>
+    <hr>
+    <section>
+        In the next article, I will introduce the Decorator pattern.<p></p>
+        <p>If you want further information about the introduction to design pattern I have summarized in this article, I suggest you to purchase the GoF book in the <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'Amazon online store');">Amazon online store</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.</p></section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

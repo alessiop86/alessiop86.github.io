@@ -1,0 +1,209 @@
+<html>
+<head>
+    <title>Eertree (or palindromic tree)</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>Eertree (or palindromic tree)</h1>
+<p>Today I want to talk about a data structure called <em>eertree</em> but also known as <em>palindromic tree</em>.
+</p>
+<p>This data structure got my attention in the first place not because it's fast and versatile in tackling problems involving palindromic substrings,
+    but because it is <em>very very recent</em>.</p>
+<p>
+    Most of the algorithms and data structures we use are 40, 50 or even more years old. In <a href="https://www.coursera.org/learn/algorithm-design-analysis" target="_blank" >this</a> famous Coursera algorithms MOOC about algorithms,
+    Stanford Professor Tim Roughgarden call "recent" the <a href="https://en.wikipedia.org/wiki/Karger%27s_algorithm"  target="_blank">Karger's algorithm</a> for calculating min cuts in a graph,
+    and it is an algorithm well over 20 years old!
+</p>
+<p>
+    Considering this, I was kind of shocked when I stumbled upon this data structure and the related algorithm, because they have been invented around 2014 by Mikhail Rubinchik and
+    presented in an <a href="https://arxiv.org/pdf/1506.04862.pdf" target="_blank">academic paper</a> for the first time in 2015 (!!!).
+</p>
+<p>
+    I wrote this
+    article trying to understand better how to implement the data structure, and hoping it will help
+    other people doing so. I have added
+    a <a target="_blank" href="https://github.com/alessiop86/eertree/tree/master/src/main/java/alessiop86/algorithms/eertree">not-best-performance-but-good-readibility algorithm implementation</a> on github,
+    and also you can find below some step-by-step illustrations about the algorithm behaviour.
+</p>
+<h2>The eertree</h2>
+<p>
+    This data structure allows to keep track of palindrome substrings (also in an online fashion)
+    in <em>linear time and space</em> (truth be told the time complexity is O(n*log(a)), where a is the size of the
+    alphabet, but an alphabet usually contains a limited number of symbols, so we can consider log(a) a constant factor and hence the linear time O(n) ).
+</p>
+<p>
+    The eertree for a given string is a directed graph with N+2 nodes, where N is the number of the distinct
+    palindrome substring found in the initial string, and 2 are the <em>degenerate palindromes</em> that
+represents the roots of the graph (more details about the 2 root nodes below, where I guide you through the step-by-step example.</p>
+<p>For every node it is mandatory to store the length of the palindrome substring,
+but also additional informations such as the occurrences can be stored, for example if you need to know the total number of
+palindrome substrings including the duplicate ones. The nodes are linked each other using two different type of edges:
+
+    <ul>
+        <li><em>labeled edges directed downwards</em>: the label for an edge connecting the palindrome substring "A"
+            with the palindrome substring "xAx" will have the label "x". It is possible to obtain the palindrome substring by
+            traversing downwards from the empty-string root to the chosen palindrome substring, without storing the palindrome inside each node;
+            per convenience in  <a target="_blank" href="https://github.com/alessiop86/eertree/tree/master/src/main/java/alessiop86/algorithms/eertree">my example code</a>
+            I have stored the whole substrings inside each node (this brings the additional space required to O(n^2)),
+            if you want to save space you should avoid it, storing only the position
+            of the substring within the string or nothing at all (if you store nothing you will have to traverse the graph when you need the substring; please note
+            that this approach is only suitable for some problems [e.g. finding all the palindrome substrings] while  it is not really good for others [e.g. finding just the longest palindrome substring]).
+ <br/>Every node may have zero or more of these edges outgoing, and exactly one incoming, otherwise the palindrome would not be reachable.
+
+        </li>
+        <li><em>unlabeled edges directed upwards</em>: these represent the longest proper
+            (i.e. the whole palindrome substring does not count) suffix of the substring that
+        is a palindrome itself. Every node has exactly one of these unlabeled edges.</li>
+    </ul>
+</p>
+<p>
+    Computing the eertree of a string, while we scan through the characters composing the string,
+    requires also to keep track of the last palindrome node added to the graph. So in total we will
+    need this last node reference, plus the space for storing the graph composed by N+2 nodes,
+    N labeled edges (every node must have exactly one incoming) and N unlabeled edges (every node bust have one outgoing):
+    the anticipated linear space requirements are confirmed.
+
+</p>
+<h3>
+    How the build an eertree for the word "eertree"
+</h3>
+<p>I will now describe step-by-step the execution of the algorithm in order to create an eertree that stores all
+    the distinct palindrome substrings of the string "eertree":</p>
+<div class="smaller">
+    <p class="clear"><em>Step 1: Initialisation</em></p>
+<img class="ontheright" src="1.jpg" />
+<p>Initialize the eertree adding the two roots: one representing the <em>empty string</em> (length 0), and the other
+representing an <em>imaginary string</em> with length -1.</p>
+
+<p>The "suffix links" (the unlabeled edges) for the two nodes are both pointing towards the imaginary node. This node will be
+    used a stop point during the backwards traversing of the tree later in the algorithm's execution.</p>
+<p>
+    There are no labeled edges out from the two nodes yet, but we will add the edges while we scan through the string.
+</p>
+    <p>
+    The reference to the current largest palindrome substring suffix
+        (for convenience I will call this suffix cursor from now on) points to the empty string.
+    </p>
+    <p class="clear"><em>Step 2: Adding [e] from [e]ertree to the data structure</em></p>
+<img class="ontheright" src="2.jpg" />
+<p>We need to find the the next palindrome eXe to insert in the eertree:
+    this is done through a process by that looks for the longest valid palindrome prefix X
+    traversing the graph starting from the suffix cursor and moving upwards using the unlabeled nodes or "suffix links".
+</p>
+<p>
+    We start with X=[EmptyString], but e[EmptyString]e=ee is a palindrome but not the one we are looking for. We then use the suffix link from the
+    [EmptyString] to the imaginary string: since the imaginary string it's theoretically centered at -1,
+    we don't care about the "e" to prepend before the -1 position and we just care about the "e" appended at position 0, resulting in a new palindrome "e".
+    We add then the new palindrome (a new node) "e" to the eertree, with a labeled edge "e" going from the longest prefix (the imaginary string node) to the new node.
+</p>
+    <p>We have now to set the suffix link for the new node: it represents the longest proper palindrome
+        suffix eYe for the new palindrome "e" (proper means that it should be different from the whole palindrome).
+        </p><p>
+    Again, we obtain it by moving upwards on the eertree nodes through the suffix link: this time we start from the
+    suffix link of the palindrome prefix used to build the new node: suffix([Immaginary String])=[Imaginary String]:
+        in this case we apply a special rule (the base rule will be explained in the step 3) that is "whenever we should put the imaginary string
+        as suffix link we replace it with the empty string instead".
+    </p>
+    <p>We now update the reference to the largest inserted suffix palindrome to the new node "e" and we proceed to inserting
+    the next letter in the eertree.</p>
+
+    <p class="clear"><em>Step 3: Adding [e] from e[e]rtree to the data structure</em></p>
+<img class="ontheright" src="3.jpg" />
+<p>The largest palindrome prefix X such that eXe is palindrome is now the empty string, so we add the new node "ee" and
+a labeled edge "e" from the empty string to the new node.</p>
+    <p>The largest palindrome suffix Y such that eYe is palindrome is obtained traversing the graph backwards using
+        the suffix links, starting from the suffix link of Y (the imaginary string): in this case prepending and appending
+    "e" to the imaginary string we obtain a proper palindrome suffix for "ee", that is "e": this will be the suffix link for "ee".</p>
+    <p>We now update the reference to the largest inserted suffix palindrome to the new node "ee" and we proceed to inserting
+        the next letter in the eertree.</p>
+    <p class="clear"><em>Step 4: Adding [r] from ee[r]tree to the data structure</em></p>
+<img class="ontheright" src="4.jpg" />
+<p>We start with X="ee" (largest inserted suffix palindrome) and we check if rXr is a palindrome substring of "eer"
+(portion of the string examined so far). It is not, so we traverse the graph back:
+rXr is not a palindrome substring either for X=e (suffix link from X=ee),
+    X=[Empty String] (suffix link from X=e), and we fall back to the special case
+with largest palindrome prefix equal to the imaginary string, already explained in step 2.</p>
+    <p>The new palindrome will be "r", we find the suffix link in the same way
+        it has been done for the "e" palindrome (that is applying the special rule and setting it to [EmptyString], then we update the reference to the largest
+        inserted suffix palindrome to the new node "r" and we proceed to inserting
+        the next letter in the eertree.</p>
+    <p class="clear"><em>Step 5: Adding [t] from eer[t]ree to the data structure</em></p>
+<img class="ontheright" src="5.jpg" />
+<p>We are in the same situation as before, the largest palindrome prefix is the imaginary string,
+    we add a new node "t", and the largest palindrome suffix of "t" the empty string. </p>
+    <p>We update the reference to the largest inserted suffix palindrome to the new node "t"
+        and we proceed to inserting the next letter in the eertree.</p>
+    <p class="clear"><em>Step 6: Adding [r] from eert[r]ee to the data structure</em></p>
+<img class="ontheright" src="6.jpg" />
+<p>Finally things start to get interesting: for X=t rXr is a valid palindrome suffix,
+so can insert a new node representing the palindrome "rtr", and from the largest palindrome prefix X=t we
+draw an edge to the new node "rtr" with label "r".</p>
+
+    <p>We then look for the largest proper palindrome suffix rYr of "rtr": we start
+        with for Y=suffix link(X)=suffix link (t)=[Empty String]:
+        r[EmptyString]r is not a valid palindrome suffix, so we traverse back the suffix link:
+        set Y=suffix link([Empty String])=[Imaginary String]. In this case r[ImaginaryString]r is
+        a proper palindrome substring: it corresponds to the palindrome "r", so the suffix link for "rtr"
+        will be an unlabeled edge going from "rtr" to "r".
+    </p>
+    <p>We now update the reference to the largest inserted suffix palindrome to the new node "rtr"
+        and we proceed to inserting the next letter in the eertree.</p>
+
+    <p class="clear"><em>Step 7: Adding [e] from eertr[e]e to the data structure</em></p>
+<img class="ontheright" src="7.jpg" />
+<p>For X=rtr eXe is a valid palindrome suffix,
+    so we can insert in the eertree a new palindrome node "ertre". From the node representing the largest palindrome prefix X=rtr we
+    draw a labeled edge "e" to the new node "ertre".</p>
+    <p>We then look for the largest proper palindrome suffix eYe of "ertre": we start
+        with for Y=suffix link(X)=suffix link (rtr)=r : e[r]e is not a valid palindrome suffix,
+         so we traverse back the suffix link (Y=suffix link(r)=suffix link(empty string):
+        in this case e[empty string]e is a palindrome, but we can't get it because "ee" is not a suffix of "ertre":
+        for Y=suffix link ([Empty String])=[Imaginary String] we get the palindrome suffix "e", drawing
+        a suffix link from "ertre" to it.
+    </p>
+    <p>We then update the reference to the largest inserted suffix palindrome to the new node "ertre".</p>
+    <p class="clear"><em>Step 8: Adding [e] from eertre[e] to the data structure</em></p>
+<img class="ontheright" src="8.jpg" />
+    <p>For X=ertre eXe is a valid palindrome suffix,
+        so can insert a new node for the palindrome "eertree", and from the node representing the largest palindrome prefix X=ertre we
+        draw a labeled edge "e" to the new node.</p>
+    <p>We then look for the largest proper palindrome suffix eYe of "eertree": we start
+        with Y=suffix link(X)=suffix link (ertre)=e, but e[e]e is not a valid palindrome suffix,
+        so we traverse back the suffix link: (Y=suffix link(e)=suffix link([Empty String]).
+        Now e[Empty String]e is the palindrome "ee" and unlike in step 7 it is a suffix of our palindrome:
+        we can draw a suffix link from "eertree" to it.
+    </p>
+    <p>With this we have run out of new letters, so all the distinct palindromes has been added to the data structure.</p>
+
+<p class="clear"></p>
+</div>
+<h2>Source code and conclusions</h2>
+<p>I have wrote a <a target="_blank" href="https://github.com/alessiop86/eertree/tree/master/src/main/java/alessiop86/algorithms/eertree">Java implementation</a> of the algorithm,
+since  the other implementations around are in C++ and mostly focused on efficiency and not readibility.
+    My version is pretty bad as far as additional space required (and probably speed),
+    but I hope it can be useful to understand the algorithm for non C++ people.
+</p>
+
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+
+
+</body>
+</html>

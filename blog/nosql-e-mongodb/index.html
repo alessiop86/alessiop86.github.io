@@ -1,0 +1,131 @@
+<html>
+<head>
+    <title>[Italian] NoSQL e MongoDB</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] NoSQL e MongoDB</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/nosql-e-mongodb/">old blog</a>)</small></small>
+<div class="entry-content">
+    <div id="attachment_29" style="width: 340px" class="wp-caption alignright"><img class="alignright size-full wp-image-92" alt="partire_leggeri" src="http://www.summarify.com/wp-content/uploads/2013/03/mongodb.png" width="330" height="275"><p class="wp-caption-text">MongoDB</p></div>
+    <p>Oggi parleremo dei database NoSQL e di un database NoSQL open source tra i più diffusi, MongoDB.</p>
+    <p>Per prima cosa bisogna definire <strong>che cos’è un database NoSQL</strong>. Innanzitutto un database NoSQL <strong>non è un database relazionale</strong>:</p>
+    <ul>
+        <li>Non utilizza SQL per eseguire query</li>
+        <li>potrebbe non rispettare le proprietà ACID cioè <strong>A</strong>tomicità, <strong>C</strong>onsistenza, <strong>I</strong>solamento e <strong>P</strong>ersistenza (<strong>D</strong>urability)</li>
+        <li>solitamente non ha bisogno di uno schema</li>
+        <li>E’ una tecnologia meno matura rispetto ai database relazionali</li>
+    </ul>
+    <p>Non essendo questa la sede più adatta per trattare le proprietà ACID, rimandiamo alla <a href="http://en.wikipedia.org/wiki/ACID" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://en.wikipedia.org/wiki/ACID', 'pagina di wikipedia');" target="_blank">pagina di wikipedia</a> per ulteriori informazioni su queste quattro proprietà caratteristiche dei database relazionali comunemente utilizzati.<br>
+        <span id="more-105"></span><br>
+        <strong>I vantaggi dei database NoSQL</strong></p>
+    <ul>
+        <li>Scalabilità in orizzontale</li>
+        <li>Migliori performance di lettura/scrittura</li>
+        <li>Superamento delle limitazioni dettate dallo schema</li>
+        <li>Possibilità di definire query complesse utilizzando un linguaggio che non è SQL</li>
+        <li>Possibilità di processare parallelamente i dati (Map-Reduce)</li>
+        <li>Maggior facilità nel replicare la base di dati per fornire ulteriore certezza di disponibilità dei dati</li>
+        <li>Tipi di dato più flessibili</li>
+    </ul>
+    <p>Esaminando i vantaggi, si nota subito come la forza e quindi il campo d’applicazione principale dei database NoSQL sia laddove c’è bisogno di lavorare con dati di dimensioni molto grandi, oppure dove le prestazioni sono critiche (sistemi real-time che possono andare dai giochi alle macchine HFT utilizzate per la compravendita di titoli in borsa in ambito finanziario).</p>
+    <section>
+        <h1>MongoDB</h1>
+        <p>E’ un database, o meglio una suite dato che presenta alcuni tools legati al database stesso (si noti che è comunque una suite snella, nulla a che vedere con le mastodontiche suite con migliaia di funzionalità offerte da Microsoft e Oracle assieme ai loro database relazionali) orientata ai documenti.</p>
+        <p>Presenta una shell quale strumento di amministrazione ed alcuni driver per l’interfacciamento con i più noti linguaggi di programmazione (esistono poi framework che wrappano al loro interno i driver stessi, ed è consigliato utilizzare questi ultimi in quanto risparmiano parte del lavoro). Inoltre all’interno della shell possiamo trovare strumenti per il profiling, per il backup, eccetera.</p>
+        <p>E’ anche presente una web I (va attivata mettendo nel file di configurazione rest=true e si trova a localhost:28017), che non permette di interagire col database ma solo di monitorarlo.</p>
+        <h2>Caratteristiche fondamentali di MongoDB</h2>
+        <ul>
+            <li>document oriented (i documenti sono scritti in JSON)</li>
+            <li>esistenza di indici</li>
+            <li>possibilità di replicazione in modo da fornire alta scalabilità e affidabilità</li>
+            <li>possibilità di eseguire query/update</li>
+            <li>possibilità di eseguire operazioni complesse</li>
+            <li>elaborazione/aggregazione tramite paradigma Map-Reduce e codice Javascript</li>
+            <li>non esiste nessuno schema, è più flessibile e può essere facilmente trasformato in oggetti</li>
+        </ul>
+        <h2>La struttura di un database MongoDB</h2>
+        <h3>Le collezioni</h3>
+        <p>Un database MongoDB è costituito da un’insieme di <strong>collezioni</strong>, che sono dei dati accumunati tra loro da una qualche parentela logica, analogamente a quanto accade con le <strong>tabelle</strong> di un database relazionale.</p>
+        <p>A differenza di queste ultime però, nelle quali i dati (le righe) che contengono hanno tutti lo stesso formato o meglio lo stesso schema, <strong>i dati contenuti in una collezione sono totalmente indipendenti uno dall’altro</strong>: mentre una tabella “Anagrafica” in un database relazionale conterrà righe tutte uguali con nome, cognome, età, eccetera, in una collezione potrebbe esserci un elemento con nome,cognome,età ed un altro con solo l’età ed un altro ancora con nome,cognome,data di nascita ma non età.</p>
+        <p>Ovviamente questo permette una certa libertà ma bisogna fare attenzione ad inserire i dati in maniera tale che gli applicativi riescano poi ad estrarli ed elaborarli quando necessario.</p>
+        <h3>Documenti</h3>
+        <p>Un documento è grosso modo un <strong>record </strong>(anche detto riga o tupla) di un database relazionale. A differenza dei database relazionali però un documento può contenere al suo interno altri documenti (documenti incorporati). La dimensione massima di un documento in MongoDB è 16 Mb.</p>
+        <h3>Campi</h3>
+        <p>Sono equivalenti ai corrispettivi dei database relazionali, definiscono un singolo elemento all’interno di un documento.</p>
+        <h2>MongoDB: il primo utilizzo</h2>
+        <p>(La guida è intesa per l’utilizzo sotto Windows, sotto altri sistemi operativi le modifiche saranno minime). Ipotizzo di aver installato MongoDB su d:\mongodb\</p>
+        <h3>Il file di configurazione</h3>
+        <p>Per prima cosa occorre preparare un file di configurazione, con il blocco note creare un file config.mongodb e salvarlo nella cartella<br>
+            d:\mongodb\bin.</p>
+        <p>E’ obbligatorio all’interno di quel file impostare il percorso dei database, con una linea del genere:</p>
+        <blockquote><p>dbpath=d:\mongodb\data</p></blockquote>
+        <p>E’ possibile poi aggiungere ulteriori impostazioni di configurazione, come l’attivazione della web ui o altro, per vedere tutti i dettagli vi rimando alla <a href="http://docs.mongodb.org/manual/" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://docs.mongodb.org/manual/', 'documentazione ufficiale');" target="_blank">documentazione ufficiale</a> di MongoDB.</p>
+        <h3>Avvio del demone</h3>
+        <p>A questo punto basterà lanciare l’eseguibile del demone, specificando il path del file di configurazione (se si trovano nella stessa cartella basta il nome del file, senza percorso)</p>
+        <blockquote><p>d:\mongodb\bin\mongod.exe –config config.mongodb</p></blockquote>
+        <h3>Avvio della shell e comandi base</h3>
+        <p>Eseguendo d:\mongodb\bin\mongo.exe si aprirà la shell.</p>
+        <blockquote><p>MongoDB shell version: 2.2.3<br>
+            connecting to: test<br>
+            &gt;</p></blockquote>
+        <p>A questo punto è possibile iniziare a lavorare sul nostro database utilizzando la sintassi dei comandi di MongoDB.</p>
+        <h4>Comandi MongoDB</h4>
+        <ul>
+            <li><strong>use nome_del_database</strong> imposta il database attivo, creandolo se non esiste</li>
+            <li><strong>db.getCollectionNames()</strong> restituisce la lista di tutte le collezioni per il database in uso</li>
+            <li><strong>db.nome_collezione.insert(documento)</strong> per inserire nella collezione <em>nome_collezione</em> un documento. Il documento avrà una sintassi del tipo {name:’pippo’, eta:’f’, saldo:450}</li>
+            <li><strong>db.nome_collezione.find([selettore][,filtro])</strong> è una query, restituisce tutti i documenti presenti nella collezione <em>nome_collezione</em> il *selettore è opzionale, ed appunto serve a selezionare solo alcuni documenti/campi tra quelli presenti all’interno della collezione, l’ultimo parametro invece definisce quali campi restituire e quali no, è anch’esso opzionale ed ha una sintassi del tipo { name:1, id: 0 }</li>
+            <li>ad un comando find() posso aggiungere in coda altri comandi, es. db.nome_collezione.<strong>sort</strong>({weight:-1, name:1}).<strong>limit</strong>(2).<strong>skip</strong>(1) per rispettivamente ordinare, limitare e saltare documenti dalla lista dei documenti restituiti dal find()</li>
+            <li><strong>db.nome_collezione.remove()</strong> ripulisce la collezione di tutti i documenti</li>
+            <li><strong>db.nome_collezione.count()</strong> restituisce il numero dei documenti nella collezione</li>
+            <li><strong>db.nome_collezione.update(*selettore,riga_sostituiva,upsert, non_fermarti_al_primo_update)</strong> l’update ha una sintassi alquanto strana, innanzitutto gli ultimi 2 parametri sono booleani, il primo indica di tentare l’insert e se l’objectid esiste già procedere con un update, mentre il secondo è un nuovo documento o un insieme di campi da aggiornare, se voglio aggiornare dei campi il secondo parametro avrà una sintassi del tipo <strong>{$set: {campo1:’newValue’}}</strong> . Notare che oltre a $set è possibile utilizzare $inc oppure $push che inserisce un nuovo elemento in un campo di tipo array</li>
+            <li><strong>db.nome_collezione.ensureIndex</strong>({primoindice:1, secondoindice: -1}) per inserire un indice (anche composto da più campi e <strong>db.nome_collezione.dropIndex</strong>({primoindice:1}) per cancellare un indice</li>
+        </ul>
+        <p>*esempi di selettore:</p>
+        <ul>
+            <li>{age:30}</li>
+            <li>{age: {$gt 10} }<br>
+                dove gt sta per greater than (più grande di), ed è sostituibile con $gte (maggiore o uguale a), $lt (minore di), $lte (minore o uguale a)</li>
+            <li>selettori sull’esistenza di un campo,{‘nome_campo’:{$exists:true}}</li>
+        </ul>
+        <h4>Ed il join?</h4>
+        <p>Venendo dai database relazionale questo concetto sembra incredile, ma <strong>in MongoDB non esiste il join tra collezioni</strong>. Se vogliamo implementare qualcosa di simile occorre farlo a livello di applicativo, non di database: programmiamo due query, la seconda delle quali dipende dal risultato della prima.</p>
+        <p>Una valida alternativa al join effettuato tramite l’applicazione è la <strong>denormalizzazione</strong> dei dati, inserisco campi aggiuntivi o documenti incorporati, ottenendo un database che non è più in forma normale (presenterà dipendenze funzionali)., ma non necessita un join.</p>
+        <p>Le relazioni molti-a-molti o uno-a-molti si implementano inserendo un ObjectId quale valore del campo (es. {nome:’pippo’, padre: ObjectId(“77tfsdygfdsg”) } , ed è anche possibile utilizzare un array cioè {nome:’pippo’, genitori: [ ObjectId(“77tfsdygfdsg”) , ObjectId(“jdshfudhg”) ] }.</p>
+        <h3>Altre feature di MongoDB</h3>
+        <p>Esistono altre feature interessanti implementate in MongoDB che non sono state trattate in questa breve panoramica. Le elenco qua per permettervi di effettuare ricerche su Google o nella documentazione ufficiale per scoprire come sfruttare a fondo questo database NoSQL.</p>
+        <ul>
+            <li>Possibilità di utilizzare la struttura a documenti incorporati all’interno di selettori, ad esempio: db.anagrafica.find({‘famiglia.madre’ : ‘tiziana’})</li>
+            <li>Possibilità di eseguire riferimenti da una collezione ad un’altra utilizzando DBREF</li>
+            <li>Possibilità di eseguire elaborazioni in parallelo grazie al paradigma map-reduce</li>
+            <li>Possibilità di eseguire transazioni con la tecnica del <a href="http://docs.mongodb.org/manual/tutorial/perform-two-phase-commits/" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://docs.mongodb.org/manual/tutorial/perform-two-phase-commits/', 'commit a 2 fasi');" target="_blank">commit a 2 fasi</a>
+            </li><li>Possibilità di capire quali indici utilizza una query post-ponendo ad un comando find() il comando explain() (es. db.nome_collezione.find().explain() )
+        </li><li>Possibilità di eseguire backup, esportazioni (anche in csv) e restore utilizzando gli  strumenti mongodump e mongorestore </li>
+            <li>journaling (attivabile con journal=true nel file config *), soprattutto se ho un singolo nodo e niente repliche, è molto importante, riduce le prestazioni ma aumenta affidabilità.</li>
+        </ul>
+    </section>
+    <section>Esistono molti libri (in inglese) su MongoDB. Non ho ancora avuto l’occasione di leggerne nessuno, vedendo le recensioni su Amazon non c’è un titolo che domina su tutti gli altri, penso che i più validi siano i seguenti (<em>essendo MongoDB un database fondamentalmente semplice da utilizzare la maggior parte dei libri sono molto brevi, meno di 100 pagine, non rimanete delusi se il libro è più sottile di quanto ve lo aspettavate)</em>:</section>
+    <p><iframe style="width: 120px; height: 240px; float: left; margin-top: 20px; display: none !important;" src="http://rcm-it.amazon.it/e/cm?t=summarify-21&amp;o=29&amp;p=8&amp;l=as1&amp;asins=1935182870&amp;ref=tf_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr" height="240" width="320" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><iframe style="width: 120px; height: 240px; float: left; margin-left: 20px; margin-top: 20px; display: none !important;" src="http://rcm-it.amazon.it/e/cm?t=summarify-21&amp;o=29&amp;p=8&amp;l=as1&amp;asins=1449381561&amp;ref=tf_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr" height="240" width="320" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><iframe style="width: 120px; height: 240px; float: left; margin-left: 20px; margin-top: 20px; display: none !important;" src="http://rcm-it.amazon.it/e/cm?t=summarify-21&amp;o=29&amp;p=8&amp;l=as1&amp;asins=B005011IIM&amp;ref=tf_til&amp;fc1=000000&amp;IS2=1&amp;lt1=_blank&amp;m=amazon&amp;lc1=0000FF&amp;bc1=000000&amp;bg1=FFFFFF&amp;f=ifr" height="240" width="320" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

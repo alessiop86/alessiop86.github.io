@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Travelling Salesman Problem in Science Fiction</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>Travelling Salesman Problem in sci-fi</h1>
+
+<p>I recently stumbled upon <a href="http://www.antipope.org/charlie/blog-static/fiction/toast/toast-intro.html">Toast</a>,
+a collection of sci-fi short stories by 3 times Hugo Award Winner (the most prestigious awards in the genre) Charles Stross, now out of print and released under the Creative Commons License.</p>
+
+<p>I was particularly fascined by <em>Antibodies</em>, for its premise: the Travelling Salesman Problem has been solved in polynomial time, therefore it is the end of the world.</p>
+
+<p>The Travelling Salesman Problem, described in <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Wikipedia</a> as <em>"Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?"</em>,
+    is a problem pretty much ubiquitous in science, industry and also in everyday life (e.g. finding the most efficient path connecting pokèstops in your town while you are playing Pokèmon Go!).</p>
+
+<p>How could a such seemingly harmless problem lead to the end of the world in "Antibodies"? Indirectly... more precisely since the TSP belongs<sup>*</sup> to the class of NP problems, and
+theoretically every NP problem can be reduced to another problem of the same class of complexity, a polynomial time (in the story an astonishing O(n<sup>2</sup>))
+solution for the TSP implies that P=NP, and that every NP problem could be solved in polynomial time. Just to make an example cryptography is doomed in a such scenario.</p>
+<p>Oddly, while P=NP would come with some really positive consequences for the mankind, in Antibodies we only see the bad ones. Dystopian futures sells more books, probably...</p>
+<p>Maybe I am just splitting hairs, because this is a fictional work after all, but I could not help but note that in the story we are told that
+    <em>"someone's come up with a proof that NP-complete problems lie in P"</em>, but <strong>the TSP is not NP-complete but NP-hard</strong>,
+    because given a solution you can't verify in polynomial time whether it is optimal or not. This mistake does not alter the "Antibodies" course of the story, in my opinion there is just a little inversion (solving the TSP in polynomial time would imply P=NP, but not the other way around).
+</p></p>
+
+<p>Inaccuracies aside, I strongly recommend the story because it's short, intriguing, and one of those sci-fi improbable-but-not-too-much scenarios that makes you think.</p>
+<p></p><p></p><p></p>
+<p>Final note: I just can't end this post without this TSP's comic strip from<a href="https://xkcd.com/399/">xkcd</a>: looks like selling on eBay outperforms the doomsday algorithm.</p>
+
+
+<a href="https://xkcd.com/399/"><img style="float:none;" src="https://imgs.xkcd.com/comics/travelling_salesman_problem.png" title="TSP strip" /></a>
+
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

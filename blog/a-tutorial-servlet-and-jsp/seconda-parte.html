@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>[Italian] A tutorial – Servlet & JSP – seconda parte</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<h1>[Italian] A tutorial – Servlet & JSP – seconda parte</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/a-tutorial-servlet-jsp-seconda-parte/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Servlet and JSP" src="http://www.summarify.com/wp-content/uploads/2013/04/servletjsp_tutorial3d.png" width="300" height="267"></div>
+        <p>Servlet &amp; JSP: a tutorial è l’unico libro che ho trovato che parlasse esplicitamente di Servlet 3.0 e JSP 2.2, fin dalla copertina. All’interno del libro vengono spesso evidenziate le novità appunto apportate da questa versione delle due tecnologie in poi (attualmente non sono le ultime disponibili, con Java EE 6 sono state rilasciate le versioni 3.1 delle specifiche Servlet e 2.3 delle specifiche JavaServer Pages, ma non ho trovato libri più aggiornati).</p>
+        <p>Se desiderate approfondire l’argomento, è possibile comprare il libro in <a href="http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21', ' versione cartacea');"> versione cartacea</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0980839629" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> o<br>
+            <a href="http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21', 'versione Kindle');">versione Kindle</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0071CW080" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese). Personalmente ho acquistato la versione Kindle perchè, a differenza di altri libri dove la differenza è trascurabile, qua la versione kindle costa 1/4 dell’altra.<br>
+            <span id="more-314"></span><br>
+        </p></section>
+    <section>
+        <h1 id="sessioni-e-session-management">Sessioni e session management</h1>
+        <p>Per le applicazioni web è importantissimo, data la natura stateless di HTTP (un server non sa nulla di default su ciò che è accaduto prima). Per ricordare informazioni quali se è stato effettuato o meno il login ad esempio, è necessario avere un qualche stato dell’applicazione. Questo si può ottenere attraverso 4 diverse soluzioni:</p>
+        <h2 id="1-url-rewriting">1. Url rewriting</h2>
+        <p>Aggiungo un token alla query string, si usa in particolare se i token  non devono essere portati appresso troppi url, ma uno soltanto o comunque pochi. Un possibile problema è dato dal fatto che comunque il token, essendo presente nella query string, è visibile a tutti, quindi non è adatto per trasmettere dati sensibili (posso codificarlo al limite, passando una stringa codificata che rappresenta il token della sessione).</p>
+        <p>Si implementa all’interno del Servlet con </p>
+        <p>request.getParameter(“Nome-parametro-queurystring”);</p>
+        <p>poi utilizzerò quel parametro per garantire uno stato alla mia web application</p>
+        <h2 id="2-hidden-fields">2. Hidden fields</h2>
+        <p>Invece di aggiungere all’url i valori dello stato, li inserisco in campi hidden all’interno di un form HTML. Un vantaggio immediato è dato dalla quantità e dimensione degli stessi: la query string è limitata, mentre un form no.</p>
+        <p>Con l’url rewriting è accumulato dalla difficoltà nel portarsi dietro per molte pagine gli stessi parametri, diventa problematico.</p>
+        <h2 id="3-cookies">3. Cookies</h2>
+        <p>E’ il metodo preferibile quando devo portarmi dietro le informazioni sullo stato della web application per 3 o più pagine. </p>
+        <p>Un cookie è una coppia chiave/valore passato tra server e browser, all’interno degli HTTP headers, e posso avere al massimo 20 coppie per ogni sito.</p>
+        <p>Il problema principale di questo approccio è che l’utente può rifiutarlo nelle impostazioni del browser.</p>
+        <p>Dal punto di vista dell’impostazione in Java, si effettua con</p>
+        <p><em>Cookie c = new Cookie(“nome”,”valore”);</em><br>
+            per poi utilizzare addCookie(c) sull’oggetto HttpServletResponse, inviando così il cookie al browser dell’utente, che  lo riceve e poi lo rinvierà al server per ciascuna delle richiesta successive. Questa appena esposta è la procedura con la quale il cookie viene creato Server-Side. E’ anche possibile creare un cookie client-side utilizzando javascript, ma non è l’argomento di questo articolo.</p>
+        <p>Quando il browser effettua una richiesta alla mia applicazione Web costruita con un HttpServlet, posso leggere i cookie con il metodo <em>getCookies()</em> dell’oggetto HttpServletRequest. Purtroppo non c’è un get per nome, bisogna scorrerli tutti con un ciclo.</p>
+        <p>Per cancellare un cookie invece bisogna crearne uno nuovo con lo stesso nome e maxAge=0, cioè un cookie che scade istantaneamente e viene rimosso.</p>
+        <h2 id="4-httpsession-object">4. HttpSession Object</h2>
+        <p>E’ il metodo più potente e versatile dei 4: il Servlet Container crea una HttpSession quando un utente visita il sito, e fa in modo che tale oggetto conservi lo stato dell’applicazione per tutta la durata della visita dell’utente al sito. Ogni sessione è legata ad un solo utente, ed è ottenibile programmaticamente con il metodo <em>getSession()</em> dell’oggetto <em>HttpServletRequest</em>.</p>
+        <p>All’interno della sessione posso salvare oggetti Java di qualsiasi tipo (serializzabili) con <em>setAttribute</em> (e <em>getAttribute</em> per richiamarlo), ma devo fare attenzione e non esagerare perchè comunque sono oggetti che vanno in memoria.</p>
+        <p>E’ presente anche un metodo <em>getAttributes</em> che me li restituisce tutti, con un oggetto da scorrere (interfaccia Enumeration, simile a Iterator ma senza remove()). </p>
+        <p>Rispetto ai cookie, con l’HttpSession non c’è nulla salvato localmente al client, tranne un cookie JSESSIONID che appunto serve a sapere a quale oggetto HttpSession associare un certo client. Ovviamente deve essere un valore non difficilmente prevedibile da parte di malintenzionati. </p>
+        <p>Se la sessione termina è buona norma distruggere HttpSession e liberare memoria, ma in alternativa scade da solo dopo un certo <em>intervallo di inattività</em>, impostabile dal programmatore (se impostato 0 significa che non scadrà mai).</p>
+    </section>
+    <hr>
+    <section>
+        <p>Presto ci sarà un altro articolo con altri estratti e riassunti dal libro. Se non volete aspettare potete acquistare il libro  <a href="http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21', ' versione cartacea');"> versione cartacea</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0980839629" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> o<br>
+            <a href="http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21', 'versione Kindle');">versione Kindle</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0071CW080" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese). </p></section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

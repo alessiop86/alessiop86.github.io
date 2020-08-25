@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>1st lesson of NVIDIA Deep Learning course</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body class="article">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <h1>1st lesson of NVIDIA Deep Learning course</h1>
+
+
+    <p></p><p>Yesterday the first lesson of <a href="https://developer.nvidia.com/deep-learning-courses" target="_blank">NVIDIA’s free course on Deep Learning</a> took place. I was curious about the level of information it could provide me: I have&nbsp;been studying and tinkering&nbsp;with&nbsp;deep learning frameworks in the last year,&nbsp;in order to prepare a prototype for a Startup Accelerator (that eventually rejected us :( ), but I have not a strong theoretical background about it.</p>
+    <p><strong>The course is organized in 5 online classes,</strong> with a Q&amp;A&nbsp;session after each lesson. The next lesson is scheduled for&nbsp;5th August 2015, 9am Pacific Time (6pm CET in Italy). You need to register before the lesson in order to receive an&nbsp;email containing the link to the live streaming.</p>
+    <p>During the course the instructor announced that the&nbsp;slides and also&nbsp;the whole video of the lesson will be available online, but they are not available yet as I write.</p>
+    <h2>THE FIRST LESSON</h2>
+    <p>The argument of the first lesson was a short overview on neural networks, with their peculiarity among neural networks, and a bit of history, with the comeback from 2010 on after years (decades?) of darkness, thanks to new algorithms and the advent of new powerful GPU with thousands of cores.</p>
+    <p>The instructor seem highly competent and was able to answer to all the questions he was asked with ease (you can send questions through a little chat present in the&nbsp;course&nbsp;website).</p>
+    <p>Unfortunately it said pretty much&nbsp;all things I had already heard&nbsp;somewhere else. In particular I enjoyed listening to the deep learning history from the protagonists of the story theirself, such as&nbsp;Yann&nbsp;<a href="https://www.facebook.com/yann.lecun" target="_blank">LeCun</a>. LeCun was&nbsp;&nbsp;one of the pioneers in this field of research, he started in the 80s&nbsp;and&nbsp;“<em>He kind of carried the torch through the dark ages</em>” as Geoffrey Hinton –&nbsp;another prominent figure in the Deep Learning field – said.</p>
+    <p>The next lesson will be about the <a href="https://github.com/NVIDIA/DIGITS">DIGITS </a>interactive training system, that is an open source tool developed by NVIDIA in order to facilitate the training of deep networks such as Deep Convolutionary Neural Networks. During my experiments I already encountered DIGITS, and I have to admit it’s several order of magnitudes more friendly that the training routines provided with all the DL frameworks I encountered (Caffe, libccv, DeepBeliefSDK).</p>
+    <h2>THE FIRST LAB</h2>
+    <p>Each lesson is coupled with a lab powered by <a href="https://qwiklab.com/">qwikLABS</a>, a platform for real time training on cloud environments. This technology allow the student to launch Deep Learning tasks without owning a CUDA GPU. To prevent people for exploiting the offered computational resource, you have a usage limit of 45 or 55 minutes on the environment.</p>
+    <p>The environment runs on the AWS cloud, in particularly the Linux GPU Instances, offering &nbsp;a NVIDIA K520 GPU with 4GB of ram and 1536 CUDA cores: this configuration is more than enough for some tests and a course, but&nbsp;state of the art CNN architectures requires &nbsp;6-8 GBs&nbsp;of ram to fit in, so I guess you would require a bigger AWS GPU instance, or some kind of distributed algorithm to split the training among multiple nodes.</p>
+    <p>The lab was pretty straight-forward, you had not to write a single line of code, you were just ordered to execute some commands. The commands involved multiple DL frameworks, such as Overfeat, Caffe, Theano and Torch.</p>
+    <p>Users&nbsp;have to launch some training and classification tasks, and the lab will point out the differences in terms of performance between CPUs and GPUs on those tasks (we are talking about a 50x factor, and I am not sure&nbsp;the GPU task were even using the newest libraries that allow even better performances, like cuDNN). I hope the next lab will be a little more interactive.</p>
+    <p>&nbsp;</p>
+    <p>Summing up, this first lesson was fairly organized, but the contents were a little poor. But after all, this was just an introductory lesson, I am confident next lesson will be better.</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p></p>
+
+
+    <ul id="navlist">
+        <li class="home"><a href="http://alessio.engineer">Home</a></li>
+        <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+        <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+        <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+        <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+    </ul>
+</body>
+</html>

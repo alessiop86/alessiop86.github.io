@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>[Italian] Design Patterns: i patterns comportamentali secondo la Gang Of Four</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] Design Patterns: i patterns comportamentali secondo la Gang Of Four</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/design-patterns-i-patterns-comportamentali-secondo-la-gang-of-four/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Design Patterns: Elements of Reusable Object-Oriented Software" src="http://www.summarify.com/wp-content/uploads/2013/03/design_patterns_gof.png" width="300" height="267"></div>
+        <p><strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> è stata la prima raccolta comprensiva dei <strong>Design pattern</strong> per la progettazione di software utilizzando la progettazione ad oggetti all’insegna della massima flessibilità e riusabilità del codice. </p>
+        <p>I design pattern sono infatti dei pattern, delle soluzioni generiche da applicare in determinati casi, soluzioni eleganti architetturali ottimizzate all’insegna appunto della flessibilità, della riusabilità.</p>
+        <p>Il libro pubblicato nel 1995, è oggi ancora attuale (tranne forse nel linguaggio utilizzato per gli esempi, lo Smalltalk), ed è tra i più popolari libri sui design pattern (ne esistono molti). In particolare ho deciso di scrivere questa serie di articoli dopo aver letto, su un annuncio di lavoro, che veniva espressamente richiesta la conoscenza dei design pattern definiti dai GoF, ovvero i design pattern definiti in questo libro <span id="more-231"></span> (il libro è stato scritto da quattro differenti autori, successivamente conosciuti  come Gang Of Four, abbreviato in GoF).</p>
+        <p>Nel libro, i design pattern vengono suddivisi in 3 categorie:</p>
+        <ul>
+            <li>Design pattern creazionali</li>
+            <li>Design pattern strutturali</li>
+            <li>Design pattern comportamentali</li>
+        </ul>
+        <p>In questo secondo articolo saranno affrontati i <strong>design pattern comportamentali</strong>. Per approfondire la tua conoscenza dell’argomento, puoi acquistare il <a href="http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0201633612&amp;linkCode=as2&amp;tag=summarify-21', 'libro in inglese');">libro in inglese</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0201633612" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> oppure la sua <a href="http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21', 'Versione in italiano');">Versione in italiano</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=887192150X" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">.<br>
+        </p></section>
+    <section>
+        <h1>I design pattern comportamentali</h1>
+        <p>I design pattern strutturali sono quei design pattern che riguardano la comunicazione tra oggetti che devono cooperare, garantendone la flessibilità. Sono particolarmente importanti nei software con architetture strutturate, laddove ridurre l’accoppiamento aiuta a ridurre l’hard coding (la scrittura all’interno dei metodi di classe) delle comunicazioni e le dipendenze tra classi.</p>
+        <h2>Chain-of-responsibility</h2>
+        <p>Design pattern utilizzato dove una richiesta può essere presa in carico da vari oggetti, senza che il richiedente li conosca o senza che essi si conoscano tra di loro, creando un forte disaccoppiamento tra questi.</p>
+        <p>Si implementa creando una catena (implementabile come lista circolare, ad esempio con un riferimento al prossimo elemento della lista, che nel caso dell’ultimo è il primo elemento) all’interno di un  oggetto al quale il client effettua la sua richiesta, poi questo oggetto utilizzando la lista circolare inoltrerà a chi di dovere, secondo una qualche logica di scheduling, prenderà in carico la richiesta, ovvero un ConcreteHandler, che può anche essere di vario tipo.</p>
+        <h2>Command</h2>
+        <p>Si realizza costruendo oggetti che rappresentano azioni o eventi, incapsulando eventuali parametri o informazioni dell’azione/evento. Un possibile svantaggio di questo pattern è appunto la proliferazione di molti oggetti che rappresentano tutti i possibili eventi o le possibili azioni.</p>
+        <p>Si implementa predisponendo un <strong>Receiver</strong> per gli eventi/azioni che sono oggetti che implementano l’interfaccia <strong>Command</strong>, cioè i <strong>ConcreteCommand</strong>, attraverso i quali utilizzerò l’<strong>Invoker</strong> i cui metodi sono utilizzati dal client per eseguire le azioni incapsulate dai command.</p>
+        <h2>Iterator</h2>
+        <p>Design che permtte di accedere agli elementi di un oggetto aggregato (insieme di oggetti) in modo sequenziali, senza esporre all’esterno l’oggetto aggregato. Occorre fare attenzione affinchè l’iterator sia thread safe. Le operazioni comuni che vanno implementate su un iterator sono hasNext() e next(); addizionalmente potrei aggiungerne altre come remove() e add(), si parla di un design più evoluto e su cui comunque bisogna fare attenzione per via della concorrenza. Ovviamente l’iterator al suo interno deve avere un indice.</p>
+        <h2>Mediator</h2>
+        <p>Pattern che regola la comunicazione tra oggetti, i quali non comunicano più direttamente tra di loro ma appunto utilizzando il <strong>Mediator</strong>, un oggetto specifico. </p>
+        <p>E’ un pattern usato in sistemi che utilizzando un protocollo di invio-ricezione di messaggi, come chat room.</p>
+        <p>Il vantaggio principale è dato dal disaccoppiamento tra gli oggetti coinvolti nel processo di comunicazione mediato, che si collegano solo al mediator. </p>
+        <p>Il mediator permette di concentrarsi sull’interazione del singolo oggetto all’interno del sistema, e permette inoltre di inserire un controllo centralizzato, o ancor meglio una definizione centralizzata del protocollo di comunicazione. Questo è allo stesso tempo un punto debole del pattern in quanto l’architettura del Mediator è complessa e si tratta di un oggetto complesso da scrivere, mantenere, e che può costituire un collo di bottiglia.</p>
+        <h2>Memento</h2>
+        <p>Design pattern che “viola” l’incapsulamento permettendo di salvare lo stato interno di un oggetto in previsione di un’operazione di restore() successiva. Vengono creati degli snapshot, ad esempio può essere utile per realizzare transazioni o operazioni undo/redo.</p>
+        <p>Si implementa con un oggetto <strong>Originator</strong> responsabile della creazione/snapshot di oggetti che implementano l’interfaccia Memento.</p>
+        <h2>Observer</h2>
+        <p>Pattern che permette ad alcuni oggetti di pubblicare infomazioni e ad altri di iscriversi ad un contenuto che potrebbe essere pubblicato. Esiste quindi un’interfaccia <strong>Observer</strong> implementata dagli oggetti che desiderano ricevere informazioni sul cambiamento di stato (operazione publish).</p>
+        <p>Tutti gli oggetti che implementano tale interfaccia devono quindi iscriversi presso un altro oggetto, che terrà in una struttura tutti gli Observer, e che provvederà ad informarli utilizzando un metodo (es. update() ) ogni qualvolta avverà un cambio di stato o comunque una qualche operazione che andrà a loro notificata. Il cambio di stato potrebbe avvenire all’interno di questo oggetto o anche all’esterno.</p>
+        <h2>State</h2>
+        <p>Pattern che permette ad un oggetto di modificare il suo comportamento a seconda di quello che è il suo stato interno: utilizzando l’ereditarietà avrò differenti classi che rappresentano differenti stati interni, e posso modificarle a runtime.</p>
+        <p>I benefici di questo pattern è un codice più pulito, avendo una classe per ogni stato, ma al tempo stesso ho più classi e questo potrebbe essere un problema se le classi diventassero molto numerose.</p>
+        <p>Avrò una certa interfaccia implementata da tutti gli stati dell’oggetto, e a seconda di una determinata logica imposterò quale degli oggetti che implementano State utilizzare per eseguire un certo metodo dell’oggetto stesso.</p>
+        <h2>Strategy</h2>
+        <p>Pattern utilizzato per definire una famiglia di algoritmi,  utilizzabili in modo interscambiabile, a seconda di quale client ne fa richiesta o dei parametri della richiesta. In questo modo il client può anche non sapere quale algoritmo sarà utilizzato, la selezione dell’algoritmo è predisposta tutta all’interno dell’oggetto che riceve la richiesta. In alternativa il client può conoscere quali sono le strategie possibili, ed effettuare una richiesta appropriata a seconda delle circostanze.</p>
+        <p>La strategia da applicare può quindi essere impostata dall’esterno, dal client stesso o con un metodo col quale imposta la strategy o con una chiamata specifica, oppure può essere automaticamente assegnata a seconda dei parametri della chiamata</p>
+        <hr>
+    </section>
+    <section>
+        <p>Se desideri maggiori informazioni sui design pattern creazionali, ti suggerisco di acquistare il <a href="http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/887192150X/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=887192150X&amp;linkCode=as2&amp;tag=summarify-21', 'libro della GoF');">libro della GoF</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=887192150X" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (al miglior prezzo).</p>
+    </section></div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

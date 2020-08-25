@@ -1,0 +1,110 @@
+<html>
+<head>
+    <title>[Italian] JUnit in Action: riassunto del libro</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] JUnit in Action: riassunto del libro</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/junit-in-action-riassunto-del-libro/">old blog</a>)</small></small>
+
+    <div class="entry-content">
+        <section>
+            <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="JUnit in action" src="http://www.summarify.com/wp-content/uploads/2013/04/junit3d.png" width="300" height="267"></div>
+            <p>JUnit in Action (seconda edizione) è un libro che introduce il framework Java per il testing JUnit. Ovviamente per trattare una libreria sul testing il libro presenta anche una introduzione alla teoria del testing, con alcune best practice per l’unit testing (verso il quale è indirizzato JUnit) ed alcuni esempi pratici di utilizzo di JUnit assieme a sue estensioni (ad esempio Cactus per il testing di Servlet).</p>
+            <p>Se desiderate approfondire l’argomento, è possibile comprare il libro in versione cartacea <a href="http://www.amazon.it/gp/product/1935182021/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1935182021&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1935182021/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1935182021&amp;linkCode=as2&amp;tag=summarify-21', 'JUnit in Action');">JUnit in Action</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=1935182021" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese).<br>
+                <span id="more-273"></span><br>
+            </p></section>
+        <section>
+            <h1>Riassunto del libro</h1>
+            <p>Il libro si apre con una introduzione a JUnit, spiegando che si tratta di un <em>framework</em>, cioè un’applicazione semi completa, che offre una struttura riusabile, una struttura comune condivisa tra le varie applicazioni finali costruite utilizzando il framework: gli sviluppatori incorporando il framework nelle loro applicazioni provvendono a costruirci sopra la propria logica di business e magari anche di presentazione, estendendolo.</p>
+            <p>La differenza tra un framework ed un <em>toolkit</em> è che quest’ultimo, pur offrendo sempre delle librerie/funzionalità utilizzate dagli sviluppatori, non  prevede una struttura coerente sulla quale costruire le applicazioni, è solo un set di classi di utilità.</p>
+            <h2>La teoria dell’Unit Testing</h2>
+            <p>L’<strong>Unit Testing</strong> esamina il comportamento di una singola unità (nel caso della programmazione ad oggetti e quindi di Java, si tratta quasi sempre di un metodo). In questo riguardare una singola unità si contrappone ad <strong>Integration Test</strong> e <strong>Acceptance Test</strong>, che esaminano il comportamento di più unità assieme.</p>
+            <p>L’acceptance test spesso è fornito o comunque realizzato assieme al cliente finale, e può includere oltre ad un discorso funzionale anche aspetti di Look&amp;Feel e performance. Tralasciando il Look&amp;Feel, la parte funzionale si può testare con JUnit, anche la parte delle performance, ma per quello ci sono altri framework di testing più specifici (es. <strong>JMeter</strong>).</p>
+            <h2>xUnit</h2>
+            <p>E’ la sigla che individua una serie di framework, per vari linguaggi di programmazione, dedicati all’Unit Testing, tra cui appunto JUnit. Le caratteristiche di questi framework sono:</p>
+            <ul>
+                <li>Possibilità di eseguire test indipendentemente uno dall’altro</li>
+                <li>Individuare e riprotare gli errori test per test</li>
+                <li>Possibilità di definire facilmente i test</li>
+            </ul>
+            <h2>JUnit</h2>
+            <p>Rende possibile la definizione di test all’interno di classi che per convenzione vengono chiamate <em>xxxTest</em> (e sono chiamate Test Class o Test Case), e prevedono metodi che vanno annotati con l’annotazione <em>@Test</em>.  Ogni metodo rappresenta il test di un metodo della class da testare. E’ possibile mettere assieme più classi di test in una <em>Suite di Test</em>, che sarà lanciata dal Test Runner, una classe che si occupa dell’esecuzione della Suite. Nota che utilizzando Eclipse non serve creare un Test Runner, esiste un plugin apposito che lancia direttamente le Test Class o le Test Suite.</p>
+            <p>All’interno di un test vado poi a definire i test utilizzando espressioni come</p>
+            <ul>
+                <li>assertTrue</li>
+                <li>assertEquals</li>
+                <li>assertNotTrue</li>
+                <li>assertNotSame</li>
+                <li>assertArrayNotEquals</li>
+                <li>assertNotNull</li>
+            </ul>
+            <p>Una suite si definisce tramite l’annotazione @SuiteClasses({NomePrimaClasseTest.class, NomeSecondaClasseTest.class,… }) , specificando anche con quale runner eseguirla @RunWith(MioRunner.class)</p>
+            <h3>Annotazioni in JUnit</h3>
+            <p>Detto che un Test è individuato da @Test, è possibile arricchire l’annotazione specificando:</p>
+            <ol>
+                <li>Un timeout (utile per test di performance) <em>@Test(timeout=TIME_IN_MS)</em></li>
+                <li>Il tipo di eccezione attesa <em>@Test(expected=NomeEccezione.class)</em></li>
+                <li>Di ignorare il test per ora, perchè magari lo si sta ancora costruendo, inserendo sotto l’annotazione @Test un’altra annotazione <em>@Ignore(value=”Ignore for now blabla”)</em></li>
+            </ol>
+            <h3>Hamcrest</h3>
+            <p>Hamcrest è una libreria che permette di definire test in maniera più semplice, evitando l’uso di operatori per leggere valori da array o di concatenazioni di OR e AND, es. (anyOf , ma anche molte altre)</p>
+            <h3>Cobertura</h3>
+            <p>E’ un tool che lavora assieme a JUnit per controllare la copertura del codice da parte dei nostri test: crea una copia delle classi e ne logga l’esecuzione per vedere quali porzioni di codice non vengono testate. Genera specifici report html.</p>
+            <h2>Test di metodi complessi</h2>
+            <p>Un metodo complesso difficilmente è isolato, probabilmente al suo interno utilizzerà altre classi, fornite come argomenti al metodo o attributi dell’oggetto. Per testare un tale metodo, ci sono principalmente tre alternative:</p>
+            <ul>
+                <li>Istanziare gli oggetti reali nell’ambiente di test, creare un contesto verosimile magari all’interno di un metodo annotato con <em>@Before</em>. Nota che questa pratica non sempre è possibile, ad esempio potrebbero esserci oggetti che non hanno un costruttore esplicito (es. HttpSession o HttpRequest per testare una Servlet).</li>
+                <li>Realizzare una classe <strong>stub</strong>, che implementa una interfaccia o estende una certa classe, che restituisca dei valori statici, non dinamici, che permettano però di definire un test. Un tipo avanzato di stub potrebbe essere ottenuto utilizzando, e c’è un apposito esempio nel libro, l’istanziazione di un server Jetty che vada a predisporre una pagina statica, utilizzata dal modulo che poi voglio testare.</li>
+                <li>Realizzare una classe <strong>mock</strong>, utilizzando librerie quali EasyMock o JMock, che permettono di definire a runtime dei comportamenti che tali oggetti devono eseguire. Essendo la definizione dinamica, posso definire comportamenti diversi per la stessa classe in differenti test, mentre con gli stub avrei dovuto realizzare due classi diverse per ottenere la stessa cosa.</li>
+                <li>Se mi serve solo come parametro per la signature del metodo, posso creare un oggetto senza implementazione del tutto, un cosiddetto <strong>Dummy</strong></li>
+            </ul>
+            <h3>Unit Testing all’interno di Application Container</h3>
+            <p>Nel libro viene affrontato questo argomento, offrendo diverse soluzioni:</p>
+            <ul>
+                <li>Creazione di Mock per HttpRequest, HttpSession, e tutte le altre classi coinvolte, e test delle classi direttamente</li>
+                <li>Esecuzione nel Servlet Container (test eseguiti lato client)</li>
+                <li>Esecuzione nel Servlet Container (test eseguiti lato server)</li>
+            </ul>
+            <p>Le ultime due opzioni prevedono ovviamente l’utilizzo di programmi specifici, per i quali esistono comunque plugin per i più diffusi IDE ma che possono peggiorare le prestazioni del test. Il libro fa l’esempio di Cactus ed ha un capitolo apposito, ma il Libro è del 2011, e ad oggi il progetto Cactus è stato abbandonato ed è quindi consigliato migrare verso altri framework di testing, come ad esempio Arquillan.</p>
+            <p>E’ un peccato che Cactus sia stato abbandonato (non c’erano abbastanza volontari per seguire il progetto), era una estensione diretta di JUnit che ne riprendeva la sintassi ma era eseguibile all’interno di JEE/Servlet Container.</p>
+            <h3>Unit Testing del presentation layer</h3>
+            <p>Esistono estensioni specifiche, per esempio HTMLUnit (headless, esecuzione in un JVM) o Selenium (sfrutta i browser reali per registrare i test, tramite estensioni specifiche), oppure JSUnit.</p>
+            <p>Per ciascuna di queste estensioni il libro ha un capitoletto a parte dove vengono forniti esempi su come utilizzarle. Anche in questo caso, come nel caso di Cactus, emerge un pò i 2 anni di età del libro, dato che vengono utilizzate versioni vecchie, ma i progetti in questione non sono stati abbandonati come nel caso di Cactus, quindi non c’è nessun problema a riguardo, la sintassi non dovrebbe aver subito grandi modifiche nelle versioni aggiornate dei framework per il testing del presentation layer.</p>
+            <h2>Altri tool</h2>
+            <p>Per concludere, il libro parla anche di Tool che non si occupano solamente di testing, in particolare ha un capitolo dedicato ad Ant, uno a Maven e uno alla Continuous Integration e al Cruise Control.</p>
+            <h3>Ant</h3>
+            <p>E’ un build tool: esegue task ripetitivi impostati tramite un file xml (build file, uno per progetto).<br>
+                Se ho un’applicazione semplice posso anche buildare tutto da eclipse, ma se ho più progetti che compongono una singola applicazione, il modo migliore è uno script Ant che gestisca tutto: build, testing, ecc.</p>
+            <h3>Maven</h3>
+            <p>E’ un altro build tool, vale il discorso fatto per Ant. Nel libro viene approfondito l’argomento e c’è un esempio di un file di configurazione pom.xml .</p>
+            <h3>Continuous Integration</h3>
+            <p>Ogni 15 minuti viene eseguito un checkout, build automatico ed i test (unit + integration). Esistono tool specifici per questo task, che possono anche essere eseguiti su macchine solo dedicate alla CI, ad esempio il tool esposto nel libro è <strong>Cruise Control</strong>.</p>
+        </section>
+        <hr>
+        <section>
+            <p>Qui si conclude il mio “antipasto” del libro  <a href="http://www.amazon.it/gp/product/1935182021/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1935182021&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1935182021/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1935182021&amp;linkCode=as2&amp;tag=summarify-21', 'JUnit in Action');">JUnit in Action</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=1935182021" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;">, in vendita al miglior prezzo online  su  <a href="http://www.amazon.it/gp/product/1935182021/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1935182021&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/1935182021/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=1935182021&amp;linkCode=as2&amp;tag=summarify-21', 'Amazon');">Amazon</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=1935182021" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> (in lingua inglese, non è presente una traduzione italiana del libro).</p></section>
+    </div><!-- .entry-content -->
+
+
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>

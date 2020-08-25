@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>[Italian] A tutorial – Servlet & JSP – prima parte</title>
+    <link rel="stylesheet" href="../../style.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73813545-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<h1>[Italian] A tutorial – Servlet & JSP – prima parte</h1>
+<small><small>(Article copied from my <a href="http://www.summarify.com/ita/a-tutorial-servlet-jsp-prima-parte/">old blog</a>)</small></small>
+<div class="entry-content">
+    <section>
+        <div id="attachment_29" style="width: 330px" class="wp-caption alignright"><img class=" wp-image-29    " style="margin: 0px;" alt="Servlet and JSP" src="http://www.summarify.com/wp-content/uploads/2013/04/servletjsp_tutorial3d.png" width="300" height="267"><p class="wp-caption-text">A tutorial: Servlet &amp; JSP</p></div>
+        <p>Servlet &amp; JSP: a tutorial è l’unico libro che ho trovato che parlasse esplicitamente di Servlet 3.0 e JSP 2.2, fin dalla copertina. All’interno del libro vengono spesso evidenziate le novità appunto apportate da questa versione delle due tecnologie in poi (attualmente non sono le ultime disponibili, con Java EE 6 sono state rilasciate le versioni 3.1 delle specifiche Servlet e 2.3 delle specifiche JavaServer Pages, ma non ho trovato libri più aggiornati).</p>
+        <p>Se desiderate approfondire l’argomento, è possibile comprare il libro in <a href="http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21', ' versione cartacea');"> versione cartacea</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0980839629" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> o<br>
+            <a href="http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21', 'versione Kindle');">versione Kindle</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0071CW080" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese). Personalmente ho acquistato la versione Kindle perchè, a differenza di altri libri dove la differenza è trascurabile, qua la versione kindle costa 1/4 dell’altra.<br>
+            <span id="more-309"></span><br>
+        </p></section>
+    <section>
+        <h1 id="introduzione-alle-servlet">Introduzione alle Servlet</h1>
+        <h2 id="linterfaccia-della-classe-servlet">L’interfaccia della classe Servlet</h2>
+        <p>I metodi principali sono 5, di cui 3 in particolare servono per gestire il life cycle della servlet. Si tratta dei metodi<br>
+            – <strong>init</strong>, richiamata alla prima richiesta del servlet, si occupa di gestire l’inizializzazione dello stesso<br>
+            – <strong>service</strong> invocato ad ogni richiesta, è il metodo che si occupa di gestire la logica di business<br>
+            – <strong>detroy</strong> che si occupa della cosiddetta <em>application unload</em>, ovvero quando un servlet va disattivato, che può accadere perchè questo viene disinstallato oppure perchè il container viene spento. All’interno di questo metodo vanno inserite eventuali operazioni di clean-up, ovvero pulizia di database o altri stati del sistema legati all’esecuzione del servlet.</p>
+        <h3 id="deploy-del-servlet">Deploy del Servlet</h3>
+        <p>Una volta scritta una classe Servlet base che estende HttpServlet per effettuarne il deploy su un Servlet Container, bisogna rispettare una certa struttura per la directory della Servlet compilata. In particolare potrebbe non essere necessario sapere tutto ciò perchè strumenti come Eclipse predispongono tutto in ambiente di development e volendo preparano un file .WAR che sarà automaticamente scompattato nel Container di produzione.</p>
+        <p>La struttura della cartella comunque è la seguente</p>
+        <p>ROOT_DELLA_SERVLET<br>
+            +META-INF<br>
+            +WEB-INF<br>
+            ++LIB<br>
+            ++CLASSES</p>
+        <p>Nella root della servlet vanno i file/risorse che devono essere visibili dall’esterno, quindi pagine JSP, HTML, immagini, fogli di stile, script javascript, eccetera.</p>
+        <p>In META-INF vengono contenuti file con informazioni sul deployment<br>
+            in WEB-INF è contenuto il file web.xml (il deployment descriptor, grazie alle annotazioni è ora opzionale prima era obbligatorio), sono contenuti file JSP non accessibili direttamente con un url dall’esterno e soprattutto sono presenti le due sottocartelle più importanti: CLASSES nella quale è contenuto il bytecode del servlet compilato e LIB nella quale sono contenute le librerie esterne utilizzate dalla Servlet.</p>
+        <p>Nota che tra le librerie esterne non sono previste quelle di default di Java o quelle ad esempio relative alla Servlet (es. servlet-api.jar) perchè queste sono presenti in una cartella del Servlet Container ed accessibili a tutte le servlet presenti nello stesso.</p>
+        <h2 id="classe-httpservlet">Classe HttpServlet</h2>
+        <p>In pratica l’interfaccia Servlet viene utilizzata molto poco però, si utilizza molto di più la sottoclasse HttpServlet, che permette di utilizzare Cookie e HTTPSession. Invece del metodo service vengono utilizzati i metodi <strong>doGet</strong> e <strong>doPost</strong> per eseguire la logica di business richiesta ad ogni chiamata del servizio. Inoltre sono previsti dei metodi init e destroy di default, che possno comunque essere estesi.</p>
+        <p><em>I metodi doGet e doPost andranno sovrascritti (si può utilizzare  l’annotazione @Override per essere sicuri di aver sovrascritto il metodo e aver scritto bene la signature.</em></p>
+        <p>Per contenere i parametri della richiesta alla Servlet, esiste la classe <strong>HttpServletRequest</strong> che estende <strong>ServletRequest</strong>, ereditando dei metodi come getContentType(), getParameter(), eccetera. E questo vale anche per la response.</p>
+        <h2 id="servletcontext">ServletContext</h2>
+        <p>Esiste un contesto per ogni servlet application, o al limite uno per JVM nel caso di applicazioni distribuite. Tale contesto viene utilizzati per condividere informazioni (o meglio attributi, utilizzando i metodi <em>setAttribute</em> e <em>getAttribute</em>) tra le varie risorse dell’applicazione, oppure per registrare dinamicamente degli oggetti.</p>
+        <h2 id="deployment-descriptor-vs-annotazione-webservlet">Deployment Descriptor vs Annotazione @WebServlet</h2>
+        <p>Il deployment descriptor (DD) è un file (collocato in WEB-INF/web.xml) che contiene le informazioni necessarie al Servlet Container per eseguire il deploy del Servlet sullo stesso Container.</p>
+        <p>Era obbligatorio in passato, ora le sue funzionalità principali (non tutte, ad esempio l’impostazione load-on-startup che chiama il metodo <em>init</em> di una Servlet all’avvio della Servlet e non durante la sua prima richiesta, velocizzando quest’ultima) possono essere rimpiazzate dall’utilizzo della annotazione <strong>@WebServlet</strong>.</p>
+        <p>Il DD fa override sull’annotazione, quindi se imposto ad esempio l’url alla quale la Servlet deve rispondere sia sul DD che tramite annotazione, sarà il primo quello effettivamente adottato.</p>
+        <p>L’annotazione è forse più comoda, mentre il vantaggio del DD è dato dal fatto che posso modificarlo senza dover ricompilare nulla.</p>
+    </section>
+    <hr>
+    <section>
+        <p>Presto ci sarà un altro articolo con altri estratti e riassunti dal libro. Se non volete aspettare potete acquistare il libro  <a href="http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/0980839629/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=0980839629&amp;linkCode=as2&amp;tag=summarify-21', ' versione cartacea');"> versione cartacea</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=0980839629" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> o<br>
+            <a href="http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21" onclick="__gaTracker('send', 'event', 'outbound-article', 'http://www.amazon.it/gp/product/B0071CW080/ref=as_li_ss_tl?ie=UTF8&amp;camp=3370&amp;creative=24114&amp;creativeASIN=B0071CW080&amp;linkCode=as2&amp;tag=summarify-21', 'versione Kindle');">versione Kindle</a><img src="http://www.assoc-amazon.it/e/ir?t=summarify-21&amp;l=as2&amp;o=29&amp;a=B0071CW080" width="1" height="1" border="0" alt="" style="border: none !important; margin: 0px !important; display: none !important;"> su Amazon (in lingua inglese). </p></section>
+</div>
+<ul id="navlist">
+    <li class="home"><a href="http://alessio.engineer">Home</a></li>
+    <li class="icon linkedin"> <a href="http://www.linkedin.com/in/alessiopiergiacomi"></a></li>
+    <li class="icon twitter"><a href="https://twitter.com/alessi0p"></a></li>
+    <li class="icon quora"><a href="https://www.quora.com/profile/Alessio-Piergiacomi"></a></li>
+    <li class="icon github"><a href="https://github.com/alessiop86"></a></li>
+</ul>
+</body>
+</html>
